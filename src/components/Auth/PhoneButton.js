@@ -4,8 +4,8 @@ import oc from "open-color";
 import { shadow } from "../../lib/styleUtil";
 
 const Wrapper = styled.div`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
   padding-top: 0.6rem;
   padding-bottom: 0.5rem;
 

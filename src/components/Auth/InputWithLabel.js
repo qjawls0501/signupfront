@@ -5,7 +5,7 @@ import oc from "open-color";
 // 두개가 함께 있을땐 상단 (그 사이) 에 여백을 준다
 const Wrapper = styled.div`
   & + & {
-    margin-top: 1rem;
+    // margin-top: 1rem;
   }
 `;
 
@@ -24,6 +24,7 @@ const Input = styled.input`
   font-size: 1.2rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  margin-bottom: 0.25rem;
   ::placeholder {
     color: ${oc.gray[3]};
   }

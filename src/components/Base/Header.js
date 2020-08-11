@@ -56,7 +56,7 @@ const Spacer = styled.div`
 // 하단 그래디언트 테두리
 const GradientBorder = styled.div`
   height: 3px;
-  background: linear-gradient(to right, ${oc.blue[6]}, ${oc.cyan[5]});
+  background: linear-gradient(to right, ${oc.blue[6]}, ${oc.cyan[6]});
 `;
 
 const Header = ({ children }) => {

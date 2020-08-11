@@ -8,6 +8,7 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authActions from "redux/modules/auth";
+import GoogleLogin from "react-google-login";
 
 class Login extends Component {
   handleChange = (e) => {
@@ -24,9 +25,12 @@ class Login extends Component {
     const { AuthActions } = this.props;
     AuthActions.initializeForm("login");
   }
+  responseGoogle = (response) => {
+    console.log(response);
+  };
   render() {
     const { email, password } = this.props.form.toJS(); // form 에서 email 과 password 값을 읽어옴
-    const { handleChange } = this;
+    const { handleChange, responseGoogle } = this;
 
     return (
       <AuthContent title="로그인">
@@ -46,6 +50,14 @@ class Login extends Component {
           onChange={handleChange}
         />
         <AuthButton>로그인</AuthButton>
+        <GoogleLogin
+          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+        {document.getElementById("googleButton")}
         <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
       </AuthContent>
     );

@@ -20,7 +20,6 @@ class Register extends Component {
       message,
     });
   };
-
   validate = {
     email: (value) => {
       if (!isEmail(value)) {
@@ -37,10 +36,10 @@ class Register extends Component {
       return true;
     },
     password: (value) => {
-      var reg_pwd = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+      var reg_pwd = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[~!@#$%^&*()_+|<>?:{}]).*$/;
       if (!reg_pwd.test(value) || !isLength(value, { min: 6 })) {
         this.setError(
-          "비밀번호는 6자리 이상이어야하고 최소 1개의 알파벳과 숫자가 포함되어야 합니다."
+          "비밀번호는 6자리 이상이어야하고 최소 1개의 알파벳과 숫자와 특수문자가 포함되어야 합니다."
         );
         return false;
       }

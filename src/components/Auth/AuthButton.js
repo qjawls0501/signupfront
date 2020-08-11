@@ -6,7 +6,8 @@ import { shadow } from "../../lib/styleUtil";
 const Wrapper = styled.div`
   padding-top: 0.6rem;
   padding-bottom: 0.5rem;
-
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   background: ${oc.blue[6]};
   color: white;
 

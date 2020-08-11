@@ -6,7 +6,6 @@ import { Map } from "immutable";
 const CHANGE_INPUT = "auth/CHANGE_INPUT"; // input 값 변경
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM"; // form 초기화
 const CHECK_EMAIL_EXISTS = "auth/CHECK_EMAIL_EXISTS"; // 이메일 중복 확인
-const CHECK_USERNAME_EXISTS = "auth/CHECK_USERNAME_EXISTS"; // 아이디 중복 확인
 const LOCAL_REGISTER = "auth/LOCAL_REGISTER"; // 이메일 가입
 const LOCAL_LOGIN = "auth/LOCAL_LOGIN"; // 이메일 로그인
 const LOGOUT = "auth/LOGOUT"; // 로그아웃
@@ -25,10 +24,6 @@ export const checkEmailExists = createAction(
   CHECK_EMAIL_EXISTS,
   AuthAPI.checkEmailExists
 ); // email
-export const checkUsernameExists = createAction(
-  CHECK_USERNAME_EXISTS,
-  AuthAPI.checkUsernameExists
-); // username
 
 const initialState = Map({
   register: Map({
@@ -70,14 +65,6 @@ export default handleActions(
       onSuccess: (state, action) =>
         state.setIn(
           ["register", "exists", "email"],
-          action.payload.data.exists
-        ),
-    }),
-    ...pender({
-      type: CHECK_USERNAME_EXISTS,
-      onSuccess: (state, action) =>
-        state.setIn(
-          ["register", "exists", "username"],
           action.payload.data.exists
         ),
     }),
