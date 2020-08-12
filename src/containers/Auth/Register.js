@@ -9,9 +9,12 @@ import {
 } from "components/Auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as authActions from "redux/modules/auth";
+import * as AuthActions from "redux/modules/auth";
 import { isEmail, isLength } from "validator";
 import debounce from "lodash/debounce";
+import storage from "lib/storage";
+import * as UserActions from "redux/modules/user";
+import { valid } from "semver";
 class Register extends Component {
   setError = (message) => {
     const { AuthActions } = this.props;
@@ -33,6 +36,7 @@ class Register extends Component {
         this.setError("이름은 최소 2글자 이상으로 이루어져야 합니다.");
         return false;
       }
+      this.setError(null);
       return true;
     },
     password: (value) => {
@@ -98,7 +102,11 @@ class Register extends Component {
   handleChange = (e) => {
     const { AuthActions } = this.props;
     const { name, value } = e.target;
-
+    // console.log(this.props.form.toJS().email);
+    // console.log(this.props.form.toJS());
+    // console.log(AuthActions);
+    // console.log(e.target.value);
+    // console.log(storage);
     AuthActions.changeInput({
       name,
       value,
@@ -125,6 +133,7 @@ class Register extends Component {
       passwordConfirm,
       phonenum,
       birthday,
+      authnum,
     } = form.toJS();
 
     const { validate } = this;
@@ -136,7 +145,8 @@ class Register extends Component {
       !validate["password"](password) ||
       !validate["passwordConfirm"](passwordConfirm) ||
       !validate["phonenum"](phonenum) ||
-      !validate["birthday"](birthday)
+      !validate["birthday"](birthday) ||
+      !validate["authnum"](authnum)
     ) {
       // 하나라도 실패하면 진행하지 않음
       return;
@@ -147,11 +157,17 @@ class Register extends Component {
         email,
         username,
         password,
+        passwordConfirm,
         phonenum,
         birthday,
+        authnum,
       });
       const loggedInfo = this.props.result.toJS();
+      storage.set("loggedInfo", loggedInfo);
+      UserActions.setLoggedInfo(loggedInfo);
+      UserActions.setValidated(true);
       console.log(loggedInfo);
+
       // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
       history.push("/"); // 회원가입 성공시 홈페이지로 이동
     } catch (e) {
@@ -252,6 +268,7 @@ export default connect(
     result: state.auth.get("result"),
   }),
   (dispatch) => ({
-    AuthActions: bindActionCreators(authActions, dispatch),
+    AuthActions: bindActionCreators(AuthActions, dispatch),
+    UserActions: bindActionCreators(UserActions, dispatch),
   })
 )(Register);

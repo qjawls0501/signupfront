@@ -3,7 +3,6 @@ import styled from "styled-components";
 import oc from "open-color";
 import { Link } from "react-router-dom";
 import { shadow } from "../../lib/styleUtil";
-
 const BorderedButton = styled(Link)`
   font-weight: 600;
   color: ${oc.cyan[6]};

@@ -34,6 +34,7 @@ const initialState = Map({
       passwordConfirm: "",
       phonenum: "",
       birthday: "",
+      authnum: "",
     }),
     exists: Map({
       email: false,

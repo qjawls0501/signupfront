@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-import { Admin } from "react-admin";
-import jsonServerProvider from "ra-data-json-server";
-
-const dataProvider = jsonServerProvider("https://jsonplaceholder/typicode.com");
+import * as AuthActions from "redux/modules/auth";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as baseActions from "redux/modules/base";
 
 class Adminpage extends Component {
   render() {
-    return <Admin dataProvider={dataProvider} />;
+    return <div></div>;
   }
 }
 
-export default Adminpage;
+export default connect(
+  (state) => ({}),
+  (dispatch) => ({
+    BaseActions: bindActionCreators(baseActions, dispatch),
+  })
+)(Adminpage);
