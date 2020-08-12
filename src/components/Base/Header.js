@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import oc from "open-color";
 import { shadow, media } from "../../lib/styleUtil";
@@ -15,6 +15,7 @@ const Positioner = styled.div`
   width: 100%;
   ${shadow(2)}
 `;
+
 const Menubar = styled(MenuIcon)`
   color: ${oc.blue[6]};
   padding: 16px;
@@ -71,15 +72,9 @@ const GradientBorder = styled.div`
 
 const Header = ({ children }) => {
   const MenuButton = ({ onClick }) => <Menubar onClick={onClick}></Menubar>;
-  var toggled = false;
+  const [toggle, setToggle] = useState(false);
   const toggleMenu = () => {
-    if (toggled === false) {
-      toggled = true;
-      console.log(toggled);
-    } else {
-      toggled = false;
-      console.log(toggled);
-    }
+    setToggle(!toggle);
   };
   return (
     <div>
@@ -89,6 +84,15 @@ const Header = ({ children }) => {
             <IconButton>
               <MenuButton onClick={toggleMenu} />
             </IconButton>
+            <Drawer open={toggle}>
+              <MenuItem>Home</MenuItem>
+              <MenuItem>Home</MenuItem>
+              <MenuItem>Home</MenuItem>
+              <MenuItem>Home</MenuItem>
+              <MenuItem>Home</MenuItem>
+              <MenuItem>Home</MenuItem>
+              <MenuItem onClick={toggleMenu}>닫기</MenuItem>
+            </Drawer>
             <Logo>Calmsw</Logo>
             <Spacer />
             {children}
@@ -96,17 +100,6 @@ const Header = ({ children }) => {
         </WhiteBackground>
         <GradientBorder />
       </Positioner>
-      <Drawer open={toggled}>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Home</MenuItem>
-      </Drawer>
     </div>
   );
 };
