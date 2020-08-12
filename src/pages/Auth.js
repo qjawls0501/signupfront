@@ -5,7 +5,7 @@ import * as baseActions from "redux/modules/base";
 import { AuthWrapper } from "components/Auth";
 import { Route } from "react-router-dom";
 import { Login, Register } from "containers/Auth";
-
+import { AuthRoute } from "components/AuthRoute";
 class Auth extends Component {
   // 페이지에 진입 할 때 헤더를 비활성화
   componentWillMount() {
@@ -20,8 +20,8 @@ class Auth extends Component {
   render() {
     return (
       <AuthWrapper>
-        <Route path="/auth/login" component={Login} />
-        <Route path="/auth/register" component={Register} />
+        <AuthRoute path="/auth/login" component={Login} />
+        <AuthRoute path="/auth/register" component={Register} />
       </AuthWrapper>
     );
   }

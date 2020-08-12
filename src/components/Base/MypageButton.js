@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import oc from "open-color";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { shadow } from "../../lib/styleUtil";
-const BorderedButton = styled(Link)`
+const BorderedButton = styled.button`
   margin-left: 16px;
   font-weight: 600;
   background-color: ${oc.blue[5]};
@@ -31,8 +32,12 @@ const BorderedButton = styled(Link)`
   }
 `;
 
-const LoginButton = () => (
-  <BorderedButton to="/auth/login">로그인 / 가입</BorderedButton>
-);
+const MypageButton = ({ onClick, children }) => {
+  const history = useHistory();
+  const routeChange = () => {
+    history.push("/mypage");
+  };
+  return <BorderedButton onClick={routeChange}>마이페이지</BorderedButton>;
+};
 
-export default LoginButton;
+export default MypageButton;

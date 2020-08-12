@@ -11,7 +11,7 @@ import { bindActionCreators } from "redux";
 import * as authActions from "redux/modules/auth";
 import * as userActions from "redux/modules/user";
 import storage from "lib/storage";
-import GoogleLogin from "react-google-login";
+// import GoogleLogin from "react-google-login";
 import queryString from "query-string";
 class Login extends Component {
   handleChange = (e) => {
@@ -27,7 +27,6 @@ class Login extends Component {
   componentDidMount() {
     const { location } = this.props;
     const query = queryString.parse(location.search);
-
     if (query.expired !== undefined) {
       this.setError("세션에 만료되었습니다. 다시 로그인하세요.");
     }
@@ -51,12 +50,12 @@ class Login extends Component {
     try {
       await AuthActions.localLogin({ email, password });
       const loggedInfo = this.props.result.toJS();
-      console.log(loggedInfo);
+      // console.log(loggedInfo);
       UserActions.setLoggedInfo(loggedInfo);
       history.push("/");
-      console.log(loggedInfo);
+      // console.log(loggedInfo);
       storage.set("loggedInfo", loggedInfo);
-      console.log(storage.get("loggedInfo").email);
+      // console.log(storage.get("loggedInfo").email);
     } catch (e) {
       console.log("a");
       this.setError("올바른 이메일 또는 비밀번호를 입력해 주세요.");
@@ -65,9 +64,14 @@ class Login extends Component {
   responseGoogle = (response) => {
     console.log(response);
   };
+  keyPress = (e) => {
+    if (e.key === "Enter") {
+      this.handleLocalLogin();
+    }
+  };
   render() {
     const { email, password } = this.props.form.toJS(); // form 에서 email 과 password 값을 읽어옴
-    const { handleChange, responseGoogle, handleLocalLogin } = this;
+    const { handleChange, responseGoogle, handleLocalLogin, keyPress } = this;
     const { error } = this.props;
     return (
       <AuthContent title="로그인">
@@ -85,6 +89,7 @@ class Login extends Component {
           type="password"
           value={password}
           onChange={handleChange}
+          onKeyPress={keyPress}
         />
         {error && <AuthError>{error}</AuthError>}
         <AuthButton onClick={handleLocalLogin}>로그인</AuthButton>

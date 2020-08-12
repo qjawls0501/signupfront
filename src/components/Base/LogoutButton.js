@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import oc from "open-color";
-import { Link } from "react-router-dom";
 import { shadow } from "../../lib/styleUtil";
-const BorderedButton = styled(Link)`
+const BorderedButton = styled.button`
   margin-left: 16px;
   font-weight: 600;
   background-color: ${oc.blue[5]};
@@ -31,8 +30,8 @@ const BorderedButton = styled(Link)`
   }
 `;
 
-const LoginButton = () => (
-  <BorderedButton to="/auth/login">로그인 / 가입</BorderedButton>
+const LogoutButton = ({ onClick, children }) => (
+  <BorderedButton onClick={onClick}>{children}</BorderedButton>
 );
 
-export default LoginButton;
+export default LogoutButton;

@@ -1,5 +1,4 @@
 import axios from "axios";
-
 export const checkEmailExists = (email) =>
   axios.get("/api/auth/exists/email/" + email);
 export const localRegister = ({

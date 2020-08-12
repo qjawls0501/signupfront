@@ -124,6 +124,11 @@ class Register extends Component {
     const { AuthActions } = this.props;
     AuthActions.initializeForm("register");
   }
+  keyPress = (e) => {
+    if (e.key === "Enter") {
+      this.handleLocalRegister();
+    }
+  };
   handleLocalRegister = async () => {
     const { form, AuthActions, error, history } = this.props;
     const {
@@ -193,7 +198,7 @@ class Register extends Component {
       phonenum,
       authnum,
     } = this.props.form.toJS();
-    const { handleChange, handleLocalRegister } = this;
+    const { handleChange, handleLocalRegister, keyPress } = this;
     return (
       <AuthContent title="회원가입">
         <InputWithLabel
@@ -250,6 +255,7 @@ class Register extends Component {
           placeholder="인증번호"
           value={authnum}
           onChange={handleChange}
+          onKeyPress={keyPress}
         />
         <PhoneButton>인증하기</PhoneButton>
         {error && <AuthError>{error}</AuthError>}

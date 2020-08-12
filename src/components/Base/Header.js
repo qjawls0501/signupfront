@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import oc from "open-color";
 import { shadow, media } from "../../lib/styleUtil";
-
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Drawer from "@material-ui/core/Drawer";
+import MenuItem from "@material-ui/core/MenuItem";
 // 상단 고정, 그림자
 const Positioner = styled.div`
   display: flex;
@@ -12,7 +15,15 @@ const Positioner = styled.div`
   width: 100%;
   ${shadow(2)}
 `;
-
+const Menubar = styled(MenuIcon)`
+  color: ${oc.blue[6]};
+  padding: 16px;
+  &:hover {
+    background: ${oc.blue[6]};
+    color: white;
+    ${shadow(1)}
+  }
+`;
 // 흰 배경, 내용 중간 정렬
 const WhiteBackground = styled.div`
   background: white;
@@ -23,16 +34,15 @@ const WhiteBackground = styled.div`
 
 // 해더의 내용
 const HeaderContents = styled.div`
-  width: 1200px;
+  width: 100%;
   height: 55px;
   display: flex;
   flex-direction: row;
   align-items: center;
-
   padding-right: 1rem;
   padding-left: 1rem;
   ${media.wide`
-        width: 992px;
+        width: 100%;
     `}
 
   ${media.tablet`
@@ -60,17 +70,44 @@ const GradientBorder = styled.div`
 `;
 
 const Header = ({ children }) => {
+  const MenuButton = ({ onClick }) => <Menubar onClick={onClick}></Menubar>;
+  var toggled = false;
+  const toggleMenu = () => {
+    if (toggled === false) {
+      toggled = true;
+      console.log(toggled);
+    } else {
+      toggled = false;
+      console.log(toggled);
+    }
+  };
   return (
-    <Positioner>
-      <WhiteBackground>
-        <HeaderContents>
-          <Logo>Calmsw</Logo>
-          <Spacer />
-          {children}
-        </HeaderContents>
-      </WhiteBackground>
-      <GradientBorder />
-    </Positioner>
+    <div>
+      <Positioner>
+        <WhiteBackground>
+          <HeaderContents>
+            <IconButton>
+              <MenuButton onClick={toggleMenu} />
+            </IconButton>
+            <Logo>Calmsw</Logo>
+            <Spacer />
+            {children}
+          </HeaderContents>
+        </WhiteBackground>
+        <GradientBorder />
+      </Positioner>
+      <Drawer open={toggled}>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>Home</MenuItem>
+      </Drawer>
+    </div>
   );
 };
 
