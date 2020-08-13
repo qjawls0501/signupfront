@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import * as userActions from "redux/modules/user";
 import { bindActionCreators } from "redux";
 import storage from "lib/storage";
-import LogoutButton from "components/Base/LogoutButton";
-import MypageButton from "components/Base/MypageButton";
 import PersonIcon from "@material-ui/icons/Person";
 import AdminNavbarLinks from "components/Base/NavbarRight";
 class HeaderContainer extends Component {
