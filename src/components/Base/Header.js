@@ -6,16 +6,80 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import CallMadeIcon from "@material-ui/icons/CallMade";
+import CloseIcon from "@material-ui/icons/Close";
+
+const useStyles = makeStyles({
+  root: {
+    border: 0,
+    borderRadius: 3,
+    color: "gray",
+    height: 50,
+    width: 250,
+    marginTop: "16px",
+    alignItems: "center",
+    display: "flex",
+  },
+  con: {
+    height: 50,
+    padding: 0,
+  },
+  icon: {
+    height: 50,
+    marginRight: "24px",
+  },
+});
 // 상단 고정, 그림자
 const Positioner = styled.div`
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: relative;
   top: 0px;
   width: 100%;
   ${shadow(2)}
 `;
+const Item = styled(MenuItem)`
+  font-size: 25px;
+  background-color: ${oc.white[1]};
+  color: gray;
+  border: 1px solid ${oc.white[1]};
+  border-radius: 2px;
+  margin-top: 16px;
+  outline: 1px solid ${oc.white[6]};
+  &:hover {
+    background: ${oc.gray[2]};
+    ${shadow(2)}
+  }
 
+  &:active {
+    /* 마우스 클릭시 아래로 미세하게 움직임 */
+    border: 1px solid ${oc.white[6]};
+    transform: translateY(3px);
+  }
+`;
+const DrawerBtn = styled(Link)`
+  font-size: 25px;
+  background-color: ${oc.white[1]};
+  color: gray;
+  border: 1px solid ${oc.white[2]};
+  border-radius: 2px;
+  text-decoration: none;
+  transition: 0.2s all;
+  outline: 1px solid ${oc.white[6]};
+  &:hover {
+    background: ${oc.gray[2]};
+    ${shadow(2)}
+  }
+
+  &:active {
+    /* 마우스 클릭시 아래로 미세하게 움직임 */
+    border: 1px solid ${oc.white[6]};
+
+    transform: translateY(3px);
+  }
+`;
 const Menubar = styled(MenuIcon)`
   color: ${oc.blue[6]};
   padding: 16px;
@@ -71,6 +135,7 @@ const GradientBorder = styled.div`
 `;
 
 const Header = ({ children }) => {
+  const classes = useStyles();
   const MenuButton = ({ onClick }) => <Menubar onClick={onClick}></Menubar>;
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () => {
@@ -85,13 +150,34 @@ const Header = ({ children }) => {
               <MenuButton onClick={toggleMenu} />
             </IconButton>
             <Drawer open={toggle}>
-              <MenuItem>Home</MenuItem>
-              <MenuItem>Home</MenuItem>
-              <MenuItem>Home</MenuItem>
-              <MenuItem>Home</MenuItem>
-              <MenuItem>Home</MenuItem>
-              <MenuItem>Home</MenuItem>
-              <MenuItem onClick={toggleMenu}>닫기</MenuItem>
+              <DrawerBtn className={classes.root} to="/">
+                <CallMadeIcon className={classes.icon} />
+                Home
+              </DrawerBtn>
+              <DrawerBtn className={classes.root} to="/auth">
+                <CallMadeIcon className={classes.icon} />
+                Auth
+              </DrawerBtn>
+              <DrawerBtn className={classes.root} to="/class">
+                <CallMadeIcon className={classes.icon} />
+                Class
+              </DrawerBtn>
+              <DrawerBtn className={classes.root} to="/teacher">
+                <CallMadeIcon className={classes.icon} />
+                Teacher
+              </DrawerBtn>
+              <DrawerBtn className={classes.root} to="/qna">
+                <CallMadeIcon className={classes.icon} />
+                QnA
+              </DrawerBtn>
+              <DrawerBtn className={classes.root} to="/notice">
+                <CallMadeIcon className={classes.icon} />
+                notice
+              </DrawerBtn>
+              <Item className={classes.con} onClick={toggleMenu}>
+                <CloseIcon className={classes.icon} />
+                닫기
+              </Item>
             </Drawer>
             <Logo>Calmsw</Logo>
             <Spacer />
