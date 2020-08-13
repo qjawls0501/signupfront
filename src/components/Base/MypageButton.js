@@ -32,7 +32,7 @@ const BorderedButton = styled.button`
   }
 `;
 
-const MypageButton = ({ onClick, children }) => {
+const MypageButton = () => {
   const history = useHistory();
   const routeChange = () => {
     history.push("/mypage");

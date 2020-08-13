@@ -6,7 +6,8 @@ import { bindActionCreators } from "redux";
 import storage from "lib/storage";
 import LogoutButton from "components/Base/LogoutButton";
 import MypageButton from "components/Base/MypageButton";
-
+import PersonIcon from "@material-ui/icons/Person";
+import AdminNavbarLinks from "components/Base/NavbarRight";
 class HeaderContainer extends Component {
   handleLogout = async () => {
     const { UserActions } = this.props;
@@ -28,9 +29,7 @@ class HeaderContainer extends Component {
       <Header>
         {user.get("logged") ? (
           <div>
-            {user.getIn(["loggedInfo", "username"])} 님
-            <MypageButton>마이페이지</MypageButton>
-            <LogoutButton onClick={this.handleLogout}>로그아웃</LogoutButton>
+            <AdminNavbarLinks />
           </div>
         ) : (
           <LoginButton />
