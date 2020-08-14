@@ -1,279 +1,483 @@
-// import React from "react";
-// // react plugin for creating charts
-// import ChartistGraph from "react-chartist";
-//  @material-ui/core
-// import { makeStyles } from "@material-ui/core/styles";
-// import Icon from "@material-ui/core/Icon";
-//  @material-ui/icons
-// import Store from "@material-ui/icons/Store";
-// import Warning from "@material-ui/icons/Warning";
-// import DateRange from "@material-ui/icons/DateRange";
-// import LocalOffer from "@material-ui/icons/LocalOffer";
-// import Update from "@material-ui/icons/Update";
-// import ArrowUpward from "@material-ui/icons/ArrowUpward";
-// import AccessTime from "@material-ui/icons/AccessTime";
-// import Accessibility from "@material-ui/icons/Accessibility";
-// import BugReport from "@material-ui/icons/BugReport";
-// import Code from "@material-ui/icons/Code";
-// import Cloud from "@material-ui/icons/Cloud";
-//  core components
-// import GridItem from "material-dashboard-react/src/components/Grid/GridItem.js";
-// import GridContainer from "material-dashboard-react/src/components/Grid/GridContainer.js";
-// import Table from "material-dashboard-react/src/components/Table/Table.js";
-// import Tasks from "material-dashboard-react/src/components/Tasks/Tasks.js";
-// import CustomTabs from "material-dashboard-react/src/components/CustomTabs/CustomTabs.js";
-// import Danger from "material-dashboard-react/src/components/Typography/Danger.js";
-// import Card from "material-dashboard-react/src/components/Card/Card.js";
-// import CardHeader from "material-dashboard-react/src/components/Card/CardHeader.js";
-// import CardIcon from "material-dashboard-react/src/components/Card/CardIcon.js";
-// import CardBody from "material-dashboard-react/src/components/Card/CardBody.js";
-// import CardFooter from "material-dashboard-react/src/components/Card/CardFooter.js";
+import { AnnouncementCard, TodosCard } from "components/Card";
+import HorizontalAvatarList from "components/Admin/HorizontalAvatarList";
+import MapWithBubbles from "components/Admin/MapWithBubbles";
+import Page from "components/Admin/Page";
+import ProductMedia from "components/Admin/ProductMedia";
+import SupportTicket from "components/Admin/SupportTicket";
+import UserProgressTable from "components/Admin/UserProgressTable";
+import { IconWidget, NumberWidget } from "components/Widget";
+import { getStackLineChart, stackLineChartOptions } from "demos/chartjs.js";
+import {
+  avatarsData,
+  chartjs,
+  productsData,
+  supportTicketsData,
+  todosData,
+  userProgressTableData,
+} from "demos/dashboardPage";
+import React from "react";
+import { Bar, Line } from "react-chartjs-2";
+import {
+  MdBubbleChart,
+  MdInsertChart,
+  MdPersonPin,
+  MdPieChart,
+  MdRateReview,
+  MdShare,
+  MdShowChart,
+  MdThumbUp,
+} from "react-icons/md";
+import InfiniteCalendar from "react-infinite-calendar";
+import {
+  Badge,
+  Button,
+  Card,
+  CardBody,
+  CardDeck,
+  CardGroup,
+  CardHeader,
+  CardTitle,
+  Col,
+  ListGroup,
+  ListGroupItem,
+  Row,
+} from "reactstrap";
+import { getColor } from "utils/colors";
 
-// import {
-//   bugs,
-//   website,
-//   server,
-// } from "material-dashboard-react/src/variables/general.js";
+const today = new Date();
+const lastWeek = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate() - 7
+);
 
-// import {
-//   dailySalesChart,
-//   emailsSubscriptionChart,
-//   completedTasksChart,
-// } from "material-dashboard-react/src/variables/charts.js";
+class DashboardPage extends React.Component {
+  componentDidMount() {
+    // this is needed, because InfiniteCalendar forces window scroll
+    window.scrollTo(0, 0);
+  }
 
-// import styles from "material-dashboard-react/src/assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
-// const useStyles = makeStyles(styles);
-
-// export default function AdminPage() {
-//   const classes = useStyles();
-//   return (
-//     <div>
-//       <GridContainer>
-//         <GridItem xs={12} sm={6} md={3}>
-//           <Card>
-//             <CardHeader color="warning" stats icon>
-//               <CardIcon color="warning">
-//                 <Icon>content_copy</Icon>
-//               </CardIcon>
-//               <p className={classes.cardCategory}>Used Space</p>
-//               <h3 className={classes.cardTitle}>
-//                 49/50 <small>GB</small>
-//               </h3>
-//             </CardHeader>
-//             <CardFooter stats>
-//               <div className={classes.stats}>
-//                 <Danger>
-//                   <Warning />
-//                 </Danger>
-//                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-//                   Get more space
-//                 </a>
-//               </div>
-//             </CardFooter>
-//           </Card>
-//         </GridItem>
-//         <GridItem xs={12} sm={6} md={3}>
-//           <Card>
-//             <CardHeader color="success" stats icon>
-//               <CardIcon color="success">
-//                 <Store />
-//               </CardIcon>
-//               <p className={classes.cardCategory}>Revenue</p>
-//               <h3 className={classes.cardTitle}>$34,245</h3>
-//             </CardHeader>
-//             <CardFooter stats>
-//               <div className={classes.stats}>
-//                 <DateRange />
-//                 Last 24 Hours
-//               </div>
-//             </CardFooter>
-//           </Card>
-//         </GridItem>
-//         <GridItem xs={12} sm={6} md={3}>
-//           <Card>
-//             <CardHeader color="danger" stats icon>
-//               <CardIcon color="danger">
-//                 <Icon>info_outline</Icon>
-//               </CardIcon>
-//               <p className={classes.cardCategory}>Fixed Issues</p>
-//               <h3 className={classes.cardTitle}>75</h3>
-//             </CardHeader>
-//             <CardFooter stats>
-//               <div className={classes.stats}>
-//                 <LocalOffer />
-//                 Tracked from Github
-//               </div>
-//             </CardFooter>
-//           </Card>
-//         </GridItem>
-//         <GridItem xs={12} sm={6} md={3}>
-//           <Card>
-//             <CardHeader color="info" stats icon>
-//               <CardIcon color="info">
-//                 <Accessibility />
-//               </CardIcon>
-//               <p className={classes.cardCategory}>Followers</p>
-//               <h3 className={classes.cardTitle}>+245</h3>
-//             </CardHeader>
-//             <CardFooter stats>
-//               <div className={classes.stats}>
-//                 <Update />
-//                 Just Updated
-//               </div>
-//             </CardFooter>
-//           </Card>
-//         </GridItem>
-//       </GridContainer>
-//       <GridContainer>
-//         <GridItem xs={12} sm={12} md={4}>
-//           <Card chart>
-//             <CardHeader color="success">
-//               <ChartistGraph
-//                 className="ct-chart"
-//                 data={dailySalesChart.data}
-//                 type="Line"
-//                 options={dailySalesChart.options}
-//                 listener={dailySalesChart.animation}
-//               />
-//             </CardHeader>
-//             <CardBody>
-//               <h4 className={classes.cardTitle}>Daily Sales</h4>
-//               <p className={classes.cardCategory}>
-//                 <span className={classes.successText}>
-//                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-//                 </span>{" "}
-//                 increase in today sales.
-//               </p>
-//             </CardBody>
-//             <CardFooter chart>
-//               <div className={classes.stats}>
-//                 <AccessTime /> updated 4 minutes ago
-//               </div>
-//             </CardFooter>
-//           </Card>
-//         </GridItem>
-//         <GridItem xs={12} sm={12} md={4}>
-//           <Card chart>
-//             <CardHeader color="warning">
-//               <ChartistGraph
-//                 className="ct-chart"
-//                 data={emailsSubscriptionChart.data}
-//                 type="Bar"
-//                 options={emailsSubscriptionChart.options}
-//                 responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-//                 listener={emailsSubscriptionChart.animation}
-//               />
-//             </CardHeader>
-//             <CardBody>
-//               <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-//               <p className={classes.cardCategory}>Last Campaign Performance</p>
-//             </CardBody>
-//             <CardFooter chart>
-//               <div className={classes.stats}>
-//                 <AccessTime /> campaign sent 2 days ago
-//               </div>
-//             </CardFooter>
-//           </Card>
-//         </GridItem>
-//         <GridItem xs={12} sm={12} md={4}>
-//           <Card chart>
-//             <CardHeader color="danger">
-//               <ChartistGraph
-//                 className="ct-chart"
-//                 data={completedTasksChart.data}
-//                 type="Line"
-//                 options={completedTasksChart.options}
-//                 listener={completedTasksChart.animation}
-//               />
-//             </CardHeader>
-//             <CardBody>
-//               <h4 className={classes.cardTitle}>Completed Tasks</h4>
-//               <p className={classes.cardCategory}>Last Campaign Performance</p>
-//             </CardBody>
-//             <CardFooter chart>
-//               <div className={classes.stats}>
-//                 <AccessTime /> campaign sent 2 days ago
-//               </div>
-//             </CardFooter>
-//           </Card>
-//         </GridItem>
-//       </GridContainer>
-//       <GridContainer>
-//         <GridItem xs={12} sm={12} md={6}>
-//           <CustomTabs
-//             title="Tasks:"
-//             headerColor="primary"
-//             tabs={[
-//               {
-//                 tabName: "Bugs",
-//                 tabIcon: BugReport,
-//                 tabContent: (
-//                   <Tasks
-//                     checkedIndexes={[0, 3]}
-//                     tasksIndexes={[0, 1, 2, 3]}
-//                     tasks={bugs}
-//                   />
-//                 ),
-//               },
-//               {
-//                 tabName: "Website",
-//                 tabIcon: Code,
-//                 tabContent: (
-//                   <Tasks
-//                     checkedIndexes={[0]}
-//                     tasksIndexes={[0, 1]}
-//                     tasks={website}
-//                   />
-//                 ),
-//               },
-//               {
-//                 tabName: "Server",
-//                 tabIcon: Cloud,
-//                 tabContent: (
-//                   <Tasks
-//                     checkedIndexes={[1]}
-//                     tasksIndexes={[0, 1, 2]}
-//                     tasks={server}
-//                   />
-//                 ),
-//               },
-//             ]}
-//           />
-//         </GridItem>
-//         <GridItem xs={12} sm={12} md={6}>
-//           <Card>
-//             <CardHeader color="warning">
-//               <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
-//               <p className={classes.cardCategoryWhite}>
-//                 New employees on 15th September, 2016
-//               </p>
-//             </CardHeader>
-//             <CardBody>
-//               <Table
-//                 tableHeaderColor="warning"
-//                 tableHead={["ID", "Name", "Salary", "Country"]}
-//                 tableData={[
-//                   ["1", "Dakota Rice", "$36,738", "Niger"],
-//                   ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-//                   ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-//                   ["4", "Philip Chaney", "$38,735", "Korea, South"],
-//                 ]}
-//               />
-//             </CardBody>
-//           </Card>
-//         </GridItem>
-//       </GridContainer>
-//     </div>
-//   );
-// }
-
-import React, { Component } from "react";
-
-class AdminPage extends Component {
   render() {
-    return <div>Admin</div>;
+    const primaryColor = getColor("primary");
+    const secondaryColor = getColor("secondary");
+
+    return (
+      <Page
+        className="DashboardPage"
+        title="Dashboard"
+        breadcrumbs={[{ name: "Dashboard", active: true }]}
+      >
+        <Row>
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="Total Users"
+              subtitle="This month"
+              number="9.8k"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 75,
+                label: "Last month",
+              }}
+            />
+          </Col>
+
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="Monthly Users"
+              subtitle="This month"
+              number="5,400"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 45,
+                label: "Last month",
+              }}
+            />
+          </Col>
+
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="New Users"
+              subtitle="This month"
+              number="3,400"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 90,
+                label: "Last month",
+              }}
+            />
+          </Col>
+
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="Total Class"
+              subtitle="This month"
+              number="38%"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 60,
+                label: "Last month",
+              }}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="Monthly Class"
+              subtitle="This month"
+              number="9.8k"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 75,
+                label: "Last month",
+              }}
+            />
+          </Col>
+
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="Completed Class"
+              subtitle="This month"
+              number="5,400"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 45,
+                label: "Last month",
+              }}
+            />
+          </Col>
+
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="New Class"
+              subtitle="This month"
+              number="3,400"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 90,
+                label: "Last month",
+              }}
+            />
+          </Col>
+
+          <Col lg={3} md={6} sm={6} xs={12}>
+            <NumberWidget
+              title="Bounce Rate"
+              subtitle="This month"
+              number="38%"
+              color="secondary"
+              zIndex="1"
+              progress={{
+                value: 60,
+                label: "Last month",
+              }}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="8" md="12" sm="12" xs="12">
+            <Card>
+              <CardHeader>
+                Total Revenue{" "}
+                <small className="text-muted text-capitalize">This year</small>
+              </CardHeader>
+              <CardBody>
+                <Line data={chartjs.line.data} options={chartjs.line.options} />
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col lg="4" md="12" sm="12" xs="12">
+            <Card>
+              <CardHeader>Total Expense</CardHeader>
+              <CardBody>
+                <Bar data={chartjs.bar.data} options={chartjs.bar.options} />
+              </CardBody>
+              <ListGroup flush>
+                <ListGroupItem>
+                  <MdInsertChart size={25} color={primaryColor} /> Cost of sales{" "}
+                  <Badge color="secondary">$3000</Badge>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <MdBubbleChart size={25} color={primaryColor} /> Management
+                  costs <Badge color="secondary">$1200</Badge>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <MdShowChart size={25} color={primaryColor} /> Financial costs{" "}
+                  <Badge color="secondary">$800</Badge>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <MdPieChart size={25} color={primaryColor} /> Other operating
+                  costs <Badge color="secondary">$2400</Badge>
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
+          </Col>
+        </Row>
+
+        <CardGroup style={{ marginBottom: "1rem" }}>
+          <IconWidget
+            bgColor="white"
+            inverse={false}
+            icon={MdThumbUp}
+            title="50+ Likes"
+            subtitle="People you like"
+          />
+          <IconWidget
+            bgColor="white"
+            inverse={false}
+            icon={MdRateReview}
+            title="10+ Reviews"
+            subtitle="New Reviews"
+          />
+          <IconWidget
+            bgColor="white"
+            inverse={false}
+            icon={MdShare}
+            title="30+ Shares"
+            subtitle="New Shares"
+          />
+        </CardGroup>
+
+        <Row>
+          <Col md="6" sm="12" xs="12">
+            <Card>
+              <CardHeader>New Products</CardHeader>
+              <CardBody>
+                {productsData.map(
+                  ({ id, image, title, description, right }) => (
+                    <ProductMedia
+                      key={id}
+                      image={image}
+                      title={title}
+                      description={description}
+                      right={right}
+                    />
+                  )
+                )}
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col md="6" sm="12" xs="12">
+            <Card>
+              <CardHeader>New Users</CardHeader>
+              <CardBody>
+                <UserProgressTable
+                  headers={[
+                    <MdPersonPin size={25} />,
+                    "name",
+                    "date",
+                    "participation",
+                    "%",
+                  ]}
+                  usersData={userProgressTableData}
+                />
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col lg={4} md={4} sm={12} xs={12}>
+            <Card>
+              <Line
+                data={getStackLineChart({
+                  labels: [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                  ],
+                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000],
+                })}
+                options={stackLineChartOptions}
+              />
+              <CardBody
+                className="text-primary"
+                style={{ position: "absolute" }}
+              >
+                <CardTitle>
+                  <MdInsertChart /> Sales
+                </CardTitle>
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col lg={4} md={4} sm={12} xs={12}>
+            <Card>
+              <Line
+                data={getStackLineChart({
+                  labels: [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                  ],
+                  data: [10000, 15000, 5000, 10000, 5000, 10000, 10000],
+                })}
+                options={stackLineChartOptions}
+              />
+              <CardBody
+                className="text-primary"
+                style={{ position: "absolute" }}
+              >
+                <CardTitle>
+                  <MdInsertChart /> Revenue
+                </CardTitle>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg={4} md={4} sm={12} xs={12}>
+            <Card>
+              <Line
+                data={getStackLineChart({
+                  labels: [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                  ],
+                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000].reverse(),
+                })}
+                options={stackLineChartOptions}
+              />
+              <CardBody
+                className="text-primary"
+                style={{ position: "absolute", right: 0 }}
+              >
+                <CardTitle>
+                  <MdInsertChart /> Profit
+                </CardTitle>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col lg="6" md="12" sm="12" xs="12">
+            <InfiniteCalendar
+              selected={today}
+              minDate={lastWeek}
+              width="100%"
+              theme={{
+                accentColor: primaryColor,
+                floatingNav: {
+                  background: secondaryColor,
+                  chevron: primaryColor,
+                  color: "#FFF",
+                },
+                headerColor: primaryColor,
+                selectionColor: secondaryColor,
+                textColor: {
+                  active: "#FFF",
+                  default: "#333",
+                },
+                todayColor: secondaryColor,
+                weekdayColor: primaryColor,
+              }}
+            />
+          </Col>
+
+          {/* <Col lg="8" md="12" sm="12" xs="12">
+            <Card inverse className="bg-gradient-primary">
+              <CardHeader className="bg-gradient-primary">
+                Map with bubbles
+              </CardHeader>
+              <CardBody><MapWithBubbles /></CardBody>
+            </Card>
+          </Col> */}
+        </Row>
+
+        <CardDeck style={{ marginBottom: "1rem" }}>
+          <Card
+            body
+            style={{
+              overflowX: "auto",
+              paddingBottom: "15px",
+              height: "fit-content",
+              paddingTop: "inherit",
+            }}
+          >
+            <HorizontalAvatarList
+              avatars={avatarsData}
+              avatarProps={{ size: 50 }}
+            />
+          </Card>
+
+          <Card
+            body
+            style={{
+              overflowX: "auto",
+              paddingBottom: "15px",
+              height: "fit-content",
+              paddingTop: "inherit",
+            }}
+          >
+            <HorizontalAvatarList
+              avatars={avatarsData}
+              avatarProps={{ size: 50 }}
+              reversed
+            />
+          </Card>
+        </CardDeck>
+
+        <Row>
+          <Col lg="4" md="12" sm="12" xs="12">
+            <AnnouncementCard
+              color="gradient-secondary"
+              header="Announcement"
+              avatarSize={60}
+              name="Jamy"
+              date="1 hour ago"
+              text="Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy euismod tinciduntut laoreet doloremagna"
+              buttonProps={{
+                children: "show",
+              }}
+              style={{ height: 500 }}
+            />
+          </Col>
+
+          <Col lg="4" md="12" sm="12" xs="12">
+            <Card>
+              <CardHeader>
+                <div className="d-flex justify-content-between align-items-center">
+                  <span>Support Tickets</span>
+                  <Button>
+                    <small>View All</small>
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardBody>
+                {supportTicketsData.map((supportTicket) => (
+                  <SupportTicket key={supportTicket.id} {...supportTicket} />
+                ))}
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col lg="4" md="12" sm="12" xs="12">
+            <TodosCard todos={todosData} />
+          </Col>
+        </Row>
+      </Page>
+    );
   }
 }
-
-export default AdminPage;
+export default DashboardPage;

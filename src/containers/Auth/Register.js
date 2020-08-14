@@ -168,9 +168,7 @@ class Register extends Component {
         authnum,
       });
       const loggedInfo = this.props.result.toJS();
-      storage.set("loggedInfo", loggedInfo);
-      UserActions.setLoggedInfo(loggedInfo);
-      UserActions.setValidated(true);
+
       console.log(loggedInfo);
 
       // TODO: 로그인 정보 저장 (로컬스토리지/스토어)

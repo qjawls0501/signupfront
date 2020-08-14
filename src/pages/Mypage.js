@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as baseActions from "redux/modules/base";
+import storage from "lib/storage";
 
 class Mypage extends Component {
   // componentWillMount() {
@@ -13,7 +14,15 @@ class Mypage extends Component {
   //   this.props.BaseActions.setHeaderVisibility(true);
   // }
   render() {
-    return <div></div>;
+    return (
+      <div>
+        {storage.get("loggedInfo").email}
+        <br />
+        {storage.get("loggedInfo").username}
+        <br />
+        {storage.get("loggedInfo").thumbnail}
+      </div>
+    );
   }
 }
 export default connect(

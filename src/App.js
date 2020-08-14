@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { Home, Auth, Adminpage, Mypage } from "pages";
 import HeaderContainer from "containers/Base/HeaderContainer";
 import Menubar from "components/Base";
+import PageSpinner from "components/Admin/PageSpinner";
 import storage from "lib/storage";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -10,6 +11,8 @@ import * as userActions from "redux/modules/user";
 import { PrivateRoute } from "components/PrivateRoute";
 import { AuthRoute } from "components/AuthRoute";
 import { MypageRoute } from "components/MypageRoute";
+import GAListener from "components/Admin/GAListener";
+import "./styles/reduction.scss";
 class App extends Component {
   initializeUserInfo = async () => {
     const loggedInfo = storage.get("loggedInfo");
@@ -18,6 +21,7 @@ class App extends Component {
 
     const { UserActions } = this.props;
     UserActions.setLoggedInfo(loggedInfo);
+
     try {
       await UserActions.checkStatus();
     } catch (e) {
@@ -34,10 +38,14 @@ class App extends Component {
     return (
       <div>
         <HeaderContainer />
-        <Route exact path="/" component={Home} />
-        <Route path="/auth" component={Auth} />
-        <MypageRoute path="/mypage" component={Mypage} />
-        <PrivateRoute path="/admin" component={Adminpage} />
+        <GAListener>
+          <React.Suspense fallback={<PageSpinner />}>
+            <Route exact path="/" component={Home} />
+            <Route path="/auth" component={Auth} />
+            <MypageRoute path="/mypage" component={Mypage} />
+            <PrivateRoute path="/admin" component={Adminpage} />
+          </React.Suspense>
+        </GAListener>
       </div>
     );
   }
