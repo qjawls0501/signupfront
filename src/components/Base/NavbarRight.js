@@ -2,6 +2,9 @@ import React from "react";
 import classNames from "classnames";
 import storage from "lib/storage";
 import { useHistory } from "react-router-dom";
+import { shadow, media } from "../../lib/styleUtil";
+import styled from "styled-components";
+import oc from "open-color";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -18,13 +21,29 @@ import { bindActionCreators } from "redux";
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
+import SearchInput from "components/Admin/SearchInput";
 // core components
 import CustomInput from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 
 import styles from "assets/HeaderLinkStyle";
+
+const Stylebtn = styled(Button)`
+  color: ${oc.blue[6]};
+  // padding: 16px;
+  border-radius: 0px;
+  margin: 0px 2px;
+  border: 2px solid ${oc.blue[6]};
+  outline: none;
+  &:hover {
+    background: ${oc.blue[6]};
+    color: white;
+    ${shadow(1)}
+  }
+  &:focus {
+    outline: none;
+  }
+`;
 
 const useStyles = makeStyles(styles);
 
@@ -55,6 +74,7 @@ const AdminNavbarLinks = () => {
   const history = useHistory();
   const routeChange = () => {
     history.push("/mypage");
+    setOpenProfile(null);
   };
   const handleLogout = async (props) => {
     const { UserActions } = props;
@@ -69,36 +89,8 @@ const AdminNavbarLinks = () => {
   };
   return (
     <div>
-      <div className={classes.searchWrapper}>
-        <CustomInput
-          formControlProps={{
-            className: classes.margin + " " + classes.search,
-          }}
-          inputProps={{
-            placeholder: "Search",
-            inputProps: {
-              "aria-label": "Search",
-            },
-          }}
-        />
-        <Button color="white" aria-label="edit" justIcon round>
-          <Search />
-        </Button>
-      </div>
-      <Button
-        color={window.innerWidth > 959 ? "transparent" : "white"}
-        justIcon={window.innerWidth > 959}
-        simple={!(window.innerWidth > 959)}
-        aria-label="Dashboard"
-        className={classes.buttonLink}
-      >
-        <Dashboard className={classes.icons} />
-        {/* <Hidden mdUp implementation="css">
-          <p className={classes.linkText}>Dashboard</p>
-        </Hidden> */}
-      </Button>
       <div className={classes.manager}>
-        <Button
+        <Stylebtn
           color={window.innerWidth > 959 ? "transparent" : "white"}
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
@@ -114,7 +106,7 @@ const AdminNavbarLinks = () => {
               Notification
             </p>
           </Hidden> */}
-        </Button>
+        </Stylebtn>
         <Poppers
           open={Boolean(openNotification)}
           anchorEl={openNotification}
@@ -176,7 +168,7 @@ const AdminNavbarLinks = () => {
         </Poppers>
       </div>
       <div className={classes.manager}>
-        <Button
+        <Stylebtn
           color={window.innerWidth > 959 ? "transparent" : "white"}
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
@@ -189,7 +181,7 @@ const AdminNavbarLinks = () => {
           {/* <Hidden mdUp implementation="css">
             <p className={classes.linkText}>Profile</p>
           </Hidden> */}
-        </Button>
+        </Stylebtn>
         <Poppers
           open={Boolean(openProfile)}
           anchorEl={openProfile}

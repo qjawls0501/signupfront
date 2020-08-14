@@ -3,7 +3,7 @@ import PropTypes from "utils/propTypes";
 
 import { Media } from "reactstrap";
 
-import Avatar from "components/Avatar";
+import Avatar from "components/Admin/Avatar";
 
 const Notifications = ({ notificationsData }) => {
   return (

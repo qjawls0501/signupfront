@@ -9,8 +9,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import CallMadeIcon from "@material-ui/icons/CallMade";
+import Button from "@material-ui/core/Button";
 import CloseIcon from "@material-ui/icons/Close";
-
+import SearchInput from "components/Admin/SearchInput";
 const useStyles = makeStyles({
   root: {
     border: 0,
@@ -50,6 +51,8 @@ const Item = styled(MenuItem)`
   outline: 1px solid ${oc.white[6]};
   &:hover {
     background: ${oc.gray[2]};
+    color: ${oc.blue[6]};
+    text-decoration: none;
     ${shadow(2)}
   }
 
@@ -70,7 +73,9 @@ const DrawerBtn = styled(Link)`
   outline: 1px solid ${oc.white[6]};
   &:hover {
     background: ${oc.gray[2]};
-    ${shadow(2)}
+    text-decoration: none;
+    color: ${oc.blue[6]};
+    ${shadow(2)};
   }
 
   &:active {
@@ -80,13 +85,19 @@ const DrawerBtn = styled(Link)`
     transform: translateY(3px);
   }
 `;
-const Menubar = styled(MenuIcon)`
+const Menubar = styled(Button)`
   color: ${oc.blue[6]};
-  padding: 16px;
+  border-radius: 0px;
+  border: 2px solid ${oc.blue[6]};
+  outline: none;
+  margin-right: 4px;
   &:hover {
     background: ${oc.blue[6]};
     color: white;
     ${shadow(1)}
+  }
+  &:focus {
+    outline: none;
   }
 `;
 // 흰 배경, 내용 중간 정렬
@@ -136,7 +147,6 @@ const GradientBorder = styled.div`
 
 const Header = ({ children }) => {
   const classes = useStyles();
-  const MenuButton = ({ onClick }) => <Menubar onClick={onClick}></Menubar>;
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () => {
     setToggle(!toggle);
@@ -146,9 +156,10 @@ const Header = ({ children }) => {
       <Positioner>
         <WhiteBackground>
           <HeaderContents>
-            <IconButton>
-              <MenuButton onClick={toggleMenu} />
-            </IconButton>
+            <Menubar onClick={toggleMenu}>
+              <MenuIcon className={classes.menu} />
+            </Menubar>
+            <SearchInput />
             <Drawer open={toggle}>
               <DrawerBtn className={classes.root} to="/">
                 <CallMadeIcon className={classes.icon} />
