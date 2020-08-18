@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authActions from "redux/modules/auth";
 import * as userActions from "redux/modules/user";
+import * as baseActions from "redux/modules/base";
 import storage from "lib/storage";
 // import GoogleLogin from "react-google-login";
 import queryString from "query-string";
@@ -26,11 +27,17 @@ class Login extends Component {
   };
   componentDidMount() {
     const { location } = this.props;
+    this.props.BaseActions.setHeaderVisibility(false);
     const query = queryString.parse(location.search);
     if (query.expired !== undefined) {
       this.setError("세션에 만료되었습니다. 다시 로그인하세요.");
     }
   }
+  componentWillMount() {
+    this.props.BaseActions.setHeaderVisibility(false);
+  }
+
+  // 페이지에서 벗어 날 때 다시 활성화
   componentWillUnmount() {
     const { AuthActions } = this.props;
     AuthActions.initializeForm("login");
@@ -102,7 +109,7 @@ class Login extends Component {
           onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}
         /> */}
-        {document.getElementById("googleButton")}
+        {/* {document.getElementById("googleButton")} */}
         <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
       </AuthContent>
     );
@@ -118,5 +125,6 @@ export default connect(
   (dispatch) => ({
     AuthActions: bindActionCreators(authActions, dispatch),
     UserActions: bindActionCreators(userActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch),
   })
 )(Login);

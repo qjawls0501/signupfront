@@ -15,7 +15,7 @@ const Positioner = styled.div`
 // 너비, 그림자 설정
 const ShadowedBox = styled.div`
   width: 500px;
-  ${shadow(4)}
+  ${shadow(4)};
 `;
 
 // 로고
@@ -38,7 +38,7 @@ const Logo = styled(Link)`
 // children 이 들어가는 곳
 const Contents = styled.div`
   background: white;
-  padding: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
   height: auto;
 `;
 

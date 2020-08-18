@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as AuthActions from "redux/modules/auth";
+import * as baseActions from "redux/modules/base";
 import { isEmail, isLength } from "validator";
 import debounce from "lodash/debounce";
 import storage from "lib/storage";
@@ -120,6 +121,13 @@ class Register extends Component {
       check(value);
     } // name 에 따라 이메일체크할지 아이디 체크 할지 결정
   };
+  componentWillMount() {
+    this.props.BaseActions.setHeaderVisibility(false);
+  }
+  componentDidMount() {
+    this.props.BaseActions.setHeaderVisibility(false);
+  }
+  // 페이지에서 벗어 날 때 다시 활성화
   componentWillUnmount() {
     const { AuthActions } = this.props;
     AuthActions.initializeForm("register");
@@ -198,7 +206,7 @@ class Register extends Component {
     } = this.props.form.toJS();
     const { handleChange, handleLocalRegister, keyPress } = this;
     return (
-      <AuthContent title="회원가입">
+      <AuthContent title="Sign Up">
         <InputWithLabel
           label="이메일"
           type="email"
@@ -257,8 +265,8 @@ class Register extends Component {
         />
         <PhoneButton>인증하기</PhoneButton>
         {error && <AuthError>{error}</AuthError>}
-        <AuthButton onClick={handleLocalRegister}>회원가입</AuthButton>
-        <RightAlignedLink to="/auth/login">로그인</RightAlignedLink>
+        <AuthButton onClick={handleLocalRegister}>Sign Up</AuthButton>
+        <RightAlignedLink to="/auth/login">Log in</RightAlignedLink>
       </AuthContent>
     );
   }
@@ -274,5 +282,6 @@ export default connect(
   (dispatch) => ({
     AuthActions: bindActionCreators(AuthActions, dispatch),
     UserActions: bindActionCreators(UserActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch),
   })
 )(Register);

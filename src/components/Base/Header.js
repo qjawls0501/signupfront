@@ -134,11 +134,21 @@ const HeaderContents = styled.div`
 `;
 
 // 로고
-const Logo = styled.div`
+const Logo = styled(Button)`
   font-size: 1.4rem;
   letter-spacing: 2px;
-  color: ${oc.blue[7]};
+  color: ${oc.blue[6]};
+  height:
   font-family: "Rajdhani";
+  font-weight:bold;
+  &:hover {
+    background: ${oc.blue[6]};
+    color: white;
+    ${shadow(1)}
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 // 중간 여백
@@ -170,7 +180,7 @@ const Header = ({ children }) => {
             <Menubar onClick={toggleMenu}>
               <MenuIcon className={classes.menu} />
             </Menubar>
-            <SearchInput />
+            <Logo onClick={routeChange}>Calmsw</Logo>
             <Drawer open={toggle} onClick={toggleMenu}>
               <DrawerBtn className={classes.root} onClick={toggleMenu} to="/">
                 <HomeIcon className={classes.icon} />
@@ -217,8 +227,8 @@ const Header = ({ children }) => {
                 notice
               </DrawerBtn>
             </Drawer>
-            <Logo onClick={routeChange}>Calmsw</Logo>
             <Spacer />
+            <SearchInput />
             {children}
           </HeaderContents>
         </WhiteBackground>

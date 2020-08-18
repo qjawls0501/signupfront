@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "utils/propTypes";
 
 import classNames from "classnames";
-
+import image1 from "assets/img/users/100_1.jpg";
 import { Card, CardTitle, CardSubtitle, CardText, CardBody } from "reactstrap";
 import storage from "lib/storage";
 import Avatar from "../Admin/Avatar";
-
+import { styled } from "@material-ui/core";
+const StyledCard = styled(CardBody)`
+  min-height: 500px;
+`;
 const UserCard = ({
   avatar,
   avatarSize,
@@ -21,9 +24,10 @@ const UserCard = ({
 
   return (
     <Card inverse className={classes} {...restProps}>
-      <CardBody className="d-flex justify-content-center align-items-center flex-column">
+      <StyledCard className="d-flex justify-content-center align-items-center flex-column">
         <Avatar
-          src={storage.get("loggedInfo").thumbnail}
+          // src={storage.get("loggedInfo").thumbnail}
+          src={image1}
           size={avatarSize}
           className="mb-2"
         />
@@ -32,7 +36,7 @@ const UserCard = ({
         <CardText>
           <small>{text}</small>
         </CardText>
-      </CardBody>
+      </StyledCard>
       {children}
     </Card>
   );

@@ -23,6 +23,7 @@ const Input = styled.input`
   line-height: 2.5rem;
   font-size: 1.2rem;
   padding-left: 0.5rem;
+  height: 40px;
   padding-right: 0.5rem;
   margin-bottom: 0.25rem;
   ::placeholder {

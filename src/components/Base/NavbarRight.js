@@ -54,12 +54,10 @@ const StylePopper = styled(Poppers)`
   left: 0px;
   top: 0px;
   z-index: 1;
+  outline: none;
   margin-top: 7px;
+  border: none;
   margin-right: 8px;
-`;
-const StylePaper = styled(Paper)`
-  left: 0px;
-  top: 0px;
 `;
 
 const useStyles = makeStyles(styles);
@@ -76,9 +74,7 @@ const AdminNavbarLinks = () => {
       setOpenProfile(null);
     }
   };
-  const handleCloseNotification = () => {
-    setOpenNotification(null);
-  };
+
   const handleClickProfile = (event) => {
     if (openProfile && openProfile.contains(event.target)) {
       setOpenProfile(null);
@@ -87,12 +83,19 @@ const AdminNavbarLinks = () => {
       setOpenNotification(null);
     }
   };
+  const handleCloseNotification = () => {
+    setOpenNotification(null);
+  };
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
   const history = useHistory();
   const routeChange = () => {
     history.push("/mypage");
+    setOpenProfile(null);
+  };
+  const routeChange1 = () => {
+    history.push("/help");
     setOpenProfile(null);
   };
   const handleLogout = async (props) => {
@@ -258,7 +261,7 @@ const AdminNavbarLinks = () => {
                         tag="button"
                         action
                         className="border-light"
-                        onClick={handleCloseProfile}
+                        onClick={routeChange1}
                       >
                         <MdHelp /> Help
                       </ListGroupItem>

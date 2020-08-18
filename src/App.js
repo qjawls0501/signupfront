@@ -37,7 +37,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <HeaderContainer />
         <GAListener>
           <React.Suspense fallback={<PageSpinner />}>
             <Route exact path="/" component={Home} />
