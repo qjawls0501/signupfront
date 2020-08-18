@@ -4,7 +4,7 @@ import PropTypes from "utils/propTypes";
 import classNames from "classnames";
 
 import { Card, CardTitle, CardSubtitle, CardText, CardBody } from "reactstrap";
-
+import storage from "lib/storage";
 import Avatar from "../Admin/Avatar";
 
 const UserCard = ({
@@ -22,7 +22,11 @@ const UserCard = ({
   return (
     <Card inverse className={classes} {...restProps}>
       <CardBody className="d-flex justify-content-center align-items-center flex-column">
-        <Avatar src={avatar} size={avatarSize} className="mb-2" />
+        <Avatar
+          src={storage.get("loggedInfo").thumbnail}
+          size={avatarSize}
+          className="mb-2"
+        />
         <CardTitle>{title}</CardTitle>
         <CardSubtitle>{subtitle}</CardSubtitle>
         <CardText>

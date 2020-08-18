@@ -94,6 +94,10 @@ const dropdownStyle = (theme) => ({
     WebkitBackgroundClip: "padding-box",
     backgroundClip: "padding-box",
   },
+  dropdownlist: {
+    left: "-66px",
+    top: "8px",
+  },
   dropdownItem: {
     ...defaultFont,
     fontSize: "13px",

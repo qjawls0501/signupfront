@@ -11,7 +11,14 @@ import { Link } from "react-router-dom";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import Button from "@material-ui/core/Button";
 import CloseIcon from "@material-ui/icons/Close";
+import { useHistory } from "react-router-dom";
 import SearchInput from "components/Admin/SearchInput";
+import HomeIcon from "@material-ui/icons/Home";
+import ClassIcon from "@material-ui/icons/Class";
+import HelpIcon from "@material-ui/icons/Help";
+import InfoIcon from "@material-ui/icons/Info";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import FaceIcon from "@material-ui/icons/Face";
 const useStyles = makeStyles({
   root: {
     border: 0,
@@ -87,7 +94,7 @@ const DrawerBtn = styled(Link)`
 `;
 const Menubar = styled(Button)`
   color: ${oc.blue[6]};
-  border-radius: 0px;
+  border-radius: 4px;
   border: 2px solid ${oc.blue[6]};
   outline: none;
   margin-right: 4px;
@@ -151,6 +158,10 @@ const Header = ({ children }) => {
   const toggleMenu = () => {
     setToggle(!toggle);
   };
+  const history = useHistory();
+  const routeChange = () => {
+    history.push("/");
+  };
   return (
     <div>
       <Positioner>
@@ -160,42 +171,57 @@ const Header = ({ children }) => {
               <MenuIcon className={classes.menu} />
             </Menubar>
             <SearchInput />
-            <Drawer open={toggle}>
-              <DrawerBtn className={classes.root} to="/">
-                <CallMadeIcon className={classes.icon} />
+            <Drawer open={toggle} onClick={toggleMenu}>
+              <DrawerBtn className={classes.root} onClick={toggleMenu} to="/">
+                <HomeIcon className={classes.icon} />
                 Home
               </DrawerBtn>
-              <DrawerBtn className={classes.root} to="/auth">
-                <CallMadeIcon className={classes.icon} />
+              <DrawerBtn
+                className={classes.root}
+                onClick={toggleMenu}
+                to="/auth/login"
+              >
+                <AccountBoxIcon className={classes.icon} />
                 Auth
               </DrawerBtn>
-              <DrawerBtn className={classes.root} to="/class">
-                <CallMadeIcon className={classes.icon} />
+              <DrawerBtn
+                className={classes.root}
+                onClick={toggleMenu}
+                to="/class"
+              >
+                <ClassIcon className={classes.icon} />
                 Class
               </DrawerBtn>
-              <DrawerBtn className={classes.root} to="/teacher">
-                <CallMadeIcon className={classes.icon} />
+              <DrawerBtn
+                className={classes.root}
+                onClick={toggleMenu}
+                to="/teacher"
+              >
+                <FaceIcon className={classes.icon} />
                 Teacher
               </DrawerBtn>
-              <DrawerBtn className={classes.root} to="/qna">
-                <CallMadeIcon className={classes.icon} />
+              <DrawerBtn
+                className={classes.root}
+                onClick={toggleMenu}
+                to="/qna"
+              >
+                <HelpIcon className={classes.icon} />
                 QnA
               </DrawerBtn>
-              <DrawerBtn className={classes.root} to="/notice">
-                <CallMadeIcon className={classes.icon} />
+              <DrawerBtn
+                className={classes.root}
+                onClick={toggleMenu}
+                to="/notice"
+              >
+                <InfoIcon className={classes.icon} />
                 notice
               </DrawerBtn>
-              <Item className={classes.con} onClick={toggleMenu}>
-                <CloseIcon className={classes.icon} />
-                닫기
-              </Item>
             </Drawer>
-            <Logo>Calmsw</Logo>
+            <Logo onClick={routeChange}>Calmsw</Logo>
             <Spacer />
             {children}
           </HeaderContents>
         </WhiteBackground>
-        <GradientBorder />
       </Positioner>
     </div>
   );

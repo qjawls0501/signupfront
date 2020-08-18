@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import storage from "lib/storage";
+import { UserCard } from "components/Card";
 import { useHistory } from "react-router-dom";
 import { shadow, media } from "../../lib/styleUtil";
 import styled from "styled-components";
@@ -21,17 +22,22 @@ import { bindActionCreators } from "redux";
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
-import SearchInput from "components/Admin/SearchInput";
-// core components
-import CustomInput from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 
 import styles from "assets/HeaderLinkStyle";
-
+import {
+  MdExitToApp,
+  MdHelp,
+  MdMessage,
+  MdPersonPin,
+  MdSettingsApplications,
+  MdInsertChart,
+} from "react-icons/md";
+import { ListGroup, ListGroupItem } from "reactstrap";
 const Stylebtn = styled(Button)`
   color: ${oc.blue[6]};
   // padding: 16px;
-  border-radius: 0px;
+  border-radius: 4px;
   margin: 0px 2px;
   border: 2px solid ${oc.blue[6]};
   outline: none;
@@ -43,6 +49,17 @@ const Stylebtn = styled(Button)`
   &:focus {
     outline: none;
   }
+`;
+const StylePopper = styled(Poppers)`
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  margin-top: 7px;
+  margin-right: 8px;
+`;
+const StylePaper = styled(Paper)`
+  left: 0px;
+  top: 0px;
 `;
 
 const useStyles = makeStyles(styles);
@@ -56,6 +73,7 @@ const AdminNavbarLinks = () => {
       setOpenNotification(null);
     } else {
       setOpenNotification(event.currentTarget);
+      setOpenProfile(null);
     }
   };
   const handleCloseNotification = () => {
@@ -66,6 +84,7 @@ const AdminNavbarLinks = () => {
       setOpenProfile(null);
     } else {
       setOpenProfile(event.currentTarget);
+      setOpenNotification(null);
     }
   };
   const handleCloseProfile = () => {
@@ -101,13 +120,8 @@ const AdminNavbarLinks = () => {
         >
           <Notifications className={classes.icons} />
           <span className={classes.notifications}>5</span>
-          {/* <Hidden mdUp implementation="css">
-            <p onClick={handleCloseNotification} className={classes.linkText}>
-              Notification
-            </p>
-          </Hidden> */}
         </Stylebtn>
-        <Poppers
+        <StylePopper
           open={Boolean(openNotification)}
           anchorEl={openNotification}
           transition
@@ -129,43 +143,43 @@ const AdminNavbarLinks = () => {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseNotification}>
-                  <MenuList role="menu">
-                    <MenuItem
+                  <ListGroup flush>
+                    <ListGroupItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
                       Mike John responded to your email
-                    </MenuItem>
-                    <MenuItem
+                    </ListGroupItem>
+                    <ListGroupItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
                       You have 5 new tasks
-                    </MenuItem>
-                    <MenuItem
+                    </ListGroupItem>
+                    <ListGroupItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
                       You{"'"}re now friend with Andrew
-                    </MenuItem>
-                    <MenuItem
+                    </ListGroupItem>
+                    <ListGroupItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
                       Another Notification
-                    </MenuItem>
-                    <MenuItem
+                    </ListGroupItem>
+                    <ListGroupItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
                       Another One
-                    </MenuItem>
-                  </MenuList>
+                    </ListGroupItem>
+                  </ListGroup>
                 </ClickAwayListener>
               </Paper>
             </Grow>
           )}
-        </Poppers>
+        </StylePopper>
       </div>
       <div className={classes.manager}>
         <Stylebtn
@@ -178,11 +192,8 @@ const AdminNavbarLinks = () => {
           className={classes.buttonLink}
         >
           <Person className={classes.icons} />
-          {/* <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Profile</p>
-          </Hidden> */}
         </Stylebtn>
-        <Poppers
+        <StylePopper
           open={Boolean(openProfile)}
           anchorEl={openProfile}
           transition
@@ -204,32 +215,68 @@ const AdminNavbarLinks = () => {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
-                  <MenuList role="menu">
-                    <MenuItem
-                      onClick={routeChange}
-                      className={classes.dropdownItem}
-                    >
-                      Profile
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={classes.dropdownItem}
-                    >
-                      Settings
-                    </MenuItem>
-                    <Divider light />
-                    <MenuItem
-                      onClick={handleLogout}
-                      className={classes.dropdownItem}
-                    >
-                      Logout
-                    </MenuItem>
-                  </MenuList>
+                  <UserCard
+                    title={storage.get("loggedInfo").username}
+                    subtitle={storage.get("loggedInfo").email}
+                    text="Last updated 3 mins ago"
+                    className="border-light"
+                  >
+                    <ListGroup flush>
+                      <ListGroupItem
+                        tag="button"
+                        action
+                        className="border-light"
+                        onClick={routeChange}
+                      >
+                        <MdPersonPin /> Profile
+                      </ListGroupItem>
+                      <ListGroupItem
+                        tag="button"
+                        action
+                        className="border-light"
+                        onClick={handleCloseProfile}
+                      >
+                        <MdInsertChart /> Stats
+                      </ListGroupItem>
+                      <ListGroupItem
+                        tag="button"
+                        action
+                        className="border-light"
+                        onClick={handleCloseProfile}
+                      >
+                        <MdMessage /> Messages
+                      </ListGroupItem>
+                      <ListGroupItem
+                        tag="button"
+                        action
+                        className="border-light"
+                        onClick={handleCloseProfile}
+                      >
+                        <MdSettingsApplications /> Settings
+                      </ListGroupItem>
+                      <ListGroupItem
+                        tag="button"
+                        action
+                        className="border-light"
+                        onClick={handleCloseProfile}
+                      >
+                        <MdHelp /> Help
+                      </ListGroupItem>
+                      <ListGroupItem
+                        tag="button"
+                        action
+                        className="border-light"
+                        onClick={handleLogout}
+                      >
+                        <MdExitToApp /> Signout
+                      </ListGroupItem>
+                    </ListGroup>
+                  </UserCard>
                 </ClickAwayListener>
               </Paper>
             </Grow>
           )}
-        </Poppers>
+        </StylePopper>
       </div>
     </div>
   );

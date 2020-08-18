@@ -6,8 +6,7 @@ import { shadow } from "../../lib/styleUtil";
 const BorderedButton = styled(Link)`
   margin-left: 16px;
   font-weight: 600;
-  background-color: ${oc.blue[5]};
-  color: white;
+  color: ${oc.blue[6]};
   border: 1px solid ${oc.blue[4]};
   padding: 0.5rem;
   padding-bottom: 0.4rem;
@@ -15,7 +14,7 @@ const BorderedButton = styled(Link)`
   border-radius: 2px;
   text-decoration: none;
   transition: 0.2s all;
-  outline: 1px solid ${oc.blue[4]};
+  outline: 1px solid ${oc.blue[6]};
 
   &:hover {
     background: ${oc.blue[6]};
