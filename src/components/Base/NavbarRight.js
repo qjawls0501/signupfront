@@ -98,6 +98,10 @@ const AdminNavbarLinks = () => {
     history.push("/help");
     setOpenProfile(null);
   };
+  const routeChange2 = () => {
+    history.push("/stats");
+    setOpenProfile(null);
+  };
   const handleLogout = async (props) => {
     const { UserActions } = props;
     try {
@@ -237,7 +241,7 @@ const AdminNavbarLinks = () => {
                         tag="button"
                         action
                         className="border-light"
-                        onClick={handleCloseProfile}
+                        onClick={routeChange2}
                       >
                         <MdInsertChart /> Stats
                       </ListGroupItem>

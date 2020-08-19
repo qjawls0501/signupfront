@@ -7,6 +7,8 @@ import storage from "lib/storage";
 import { UserCard } from "components/Card";
 import oc from "open-color";
 import classNames from "classnames";
+import bg1Image from "assets/img/bg/react.png";
+import bg2Image from "assets/img/bg/vue.png";
 import * as userActions from "redux/modules/user";
 // @material-ui/icons
 import styled from "styled-components";
@@ -29,22 +31,29 @@ import {
   CardTitle,
   CardBody,
   CardImg,
+  CardLink,
   Card,
   Col,
   Row,
   CardText,
   ListGroupItem,
-  Button,
 } from "reactstrap";
+import Page from "components/Admin/Page";
 const ItemCenter = styled(ListGroupItem)`
   text-align: center;
+  padding-left: 16px;
 `;
 const CardProfile = styled(UserCard)`
   z-index: 0;
 `;
+const StyleCardLink = styled(CardLink)`
+  color: ${oc.blue[6]};
+`;
 const TextArea = styled(ListGroupItem)`
   color: ${oc.blue[6]};
   border: none;
+  font-weight: bold;
+  font-size: 20px;
   padding-top: 16px;
 `;
 const TextInCard = styled(CardText)`
@@ -53,6 +62,8 @@ const TextInCard = styled(CardText)`
 `;
 const TitleInCard = styled(CardTitle)`
   color: black;
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 const Mypage = ({ Component }) => {
@@ -64,7 +75,6 @@ const Mypage = ({ Component }) => {
   // componentWillUnmount() {
   //   this.props.BaseActions.setHeaderVisibility(true);
   // }
-
   const history = useHistory();
   const routeChange = () => {
     history.push("/edit");
@@ -136,25 +146,31 @@ const Mypage = ({ Component }) => {
           <Row>
             <Col md={6} sm={6} xs={12} className="mb-3">
               <Card>
-                <CardImg top src={reactimg} height="282px" />
+                <CardImg top src={bg1Image} height="242px" />
                 <CardBody>
                   <TitleInCard>React</TitleInCard>
                   <TextInCard>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    This class learns how to use React and practice React
                   </TextInCard>
+                </CardBody>
+                <CardBody>
+                  <StyleCardLink href="/class">Go to details</StyleCardLink>
                 </CardBody>
               </Card>
             </Col>
             <Col md={6} sm={6} xs={12} className="mb-3">
               <Card>
-                <CardImg top src={vueimg} height="282px" />
+                <CardImg top src={bg2Image} height="242px" />
                 <CardBody>
-                  <TitleInCard>Vue</TitleInCard>
+                  <TitleInCard color="black">Vue</TitleInCard>
                   <TextInCard>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    This class learns how to use Vue and practice Vue{" "}
                   </TextInCard>
+                </CardBody>
+                <CardBody>
+                  <StyleCardLink tag="a" href="/class">
+                    Go to details
+                  </StyleCardLink>
                 </CardBody>
               </Card>
             </Col>

@@ -165,6 +165,7 @@ const GradientBorder = styled.div`
 const Header = ({ children }) => {
   const classes = useStyles();
   const [toggle, setToggle] = useState(false);
+
   const toggleMenu = () => {
     setToggle(!toggle);
   };
@@ -172,6 +173,7 @@ const Header = ({ children }) => {
   const routeChange = () => {
     history.push("/");
   };
+
   return (
     <div>
       <Positioner>

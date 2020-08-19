@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-class Home extends Component {
+class Help extends Component {
   render() {
     return <div></div>;
   }
 }
 
-export default Home;
+export default Help;

@@ -83,7 +83,7 @@ class Login extends Component {
     const { handleChange, responseGoogle, handleLocalLogin, keyPress } = this;
     const { error } = this.props;
     return (
-      <AuthContent title="로그인">
+      <AuthContent title="Login">
         <InputWithLabel
           label="이메일"
           name="email"
@@ -101,7 +101,7 @@ class Login extends Component {
           onKeyPress={keyPress}
         />
         {error && <AuthError>{error}</AuthError>}
-        <AuthButton onClick={handleLocalLogin}>로그인</AuthButton>
+        <AuthButton onClick={handleLocalLogin}>Login</AuthButton>
         {/* <GoogleLogin
           clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
           buttonText="Login"
@@ -110,7 +110,7 @@ class Login extends Component {
           cookiePolicy={"single_host_origin"}
         /> */}
         {/* {document.getElementById("googleButton")} */}
-        <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
+        <RightAlignedLink to="/auth/register">Sign Up</RightAlignedLink>
       </AuthContent>
     );
   }

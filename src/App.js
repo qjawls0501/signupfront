@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import { Home, Auth, Adminpage, Mypage } from "pages";
-import HeaderContainer from "containers/Base/HeaderContainer";
-import Menubar from "components/Base";
+import { Home, Auth, Adminpage, Mypage, Stats } from "pages";
 import PageSpinner from "components/Admin/PageSpinner";
 import storage from "lib/storage";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "redux/modules/user";
 import { PrivateRoute } from "components/PrivateRoute";
-import { AuthRoute } from "components/AuthRoute";
 import { MypageRoute } from "components/MypageRoute";
 import GAListener from "components/Admin/GAListener";
 import "./styles/reduction.scss";
@@ -41,6 +38,7 @@ class App extends Component {
           <React.Suspense fallback={<PageSpinner />}>
             <Route exact path="/" component={Home} />
             <Route path="/auth" component={Auth} />
+            <Route path="/stats" component={Stats} />
             <MypageRoute path="/mypage" component={Mypage} />
             <PrivateRoute path="/admin" component={Adminpage} />
           </React.Suspense>
