@@ -42,7 +42,6 @@ const Chat = ({ location }) => {
 
     console.log(name, room); // lama peru
 
-    // console.log(socket);
     socket.emit("join", { name, room }, (error) => {
       // console.log("error");
       // 에러 처리
@@ -76,10 +75,6 @@ const Chat = ({ location }) => {
       socket.emit("sendMessage", message, setMessage(""));
     }
   };
-  // return <h1>Chat</h1>;
-  // 1.roominfo
-  // 2.messages
-  // 3.input
   return (
     <div className="chatOuterContainer">
       <div className="chatInnerContainer">

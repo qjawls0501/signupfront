@@ -28,7 +28,6 @@ const JoinRoom = () => {
   return (
     <div className="joinOuterContainer">
       <div className="joinInnerContainer">
-        <div className="joinImageContainer"></div>
         <div className="joinFormContainer" component={Paper}>
           <div className="joinFormBox">
             <div className="joinTitle">

@@ -19,17 +19,7 @@ body {
   /* align-items: center; */
 }
 
-.joinImageContainer {
-  display: flex;
-  justify-content: center;
-  flex: 2;
-  height: 100vh;
-  background-size: cover;
-}
 
-.joinImage {
-  flex: 1;
-}
 
 .joinFormContainer {
   /* height: 100%; */
@@ -45,7 +35,7 @@ body {
 }
 
 .joinFormBox {
-  margin: 64px 32px;
+  margin: 256px 32px;
   height: 70%;
   /* margin-top: 20px; */
   display: flex;
@@ -57,7 +47,8 @@ body {
 }
 
 .joinForm {
-  width: 100%;
+  width: 20%;
+  min-width: 300px;
   margin-top: 8px;
 }
 

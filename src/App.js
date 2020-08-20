@@ -40,8 +40,8 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/auth" component={Auth} />
             <Route path="/stats" component={Stats} />
-            <Route path="/message/chat" component={Chat} />
-            <Route exact path="/message" component={Message} />
+            <MypageRoute path="/message/chat" component={Chat} />
+            <MypageRoute exact path="/message" component={Message} />
             <MypageRoute path="/mypage" component={Mypage} />
             <PrivateRoute path="/admin" component={Adminpage} />
           </React.Suspense>
