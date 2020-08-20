@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as AuthActions from "redux/modules/auth";
 import * as baseActions from "redux/modules/base";
+import * as footActions from "redux/modules/foot";
 import { isEmail, isLength } from "validator";
 import debounce from "lodash/debounce";
 import storage from "lib/storage";
@@ -123,9 +124,11 @@ class Register extends Component {
   };
   componentWillMount() {
     this.props.BaseActions.setHeaderVisibility(false);
+    this.props.FootActions.setFooterVisibility(false);
   }
   componentDidMount() {
     this.props.BaseActions.setHeaderVisibility(false);
+    this.props.FootActions.setFooterVisibility(false);
   }
   // 페이지에서 벗어 날 때 다시 활성화
   componentWillUnmount() {
@@ -283,5 +286,6 @@ export default connect(
     AuthActions: bindActionCreators(AuthActions, dispatch),
     UserActions: bindActionCreators(UserActions, dispatch),
     BaseActions: bindActionCreators(baseActions, dispatch),
+    FootActions: bindActionCreators(footActions, dispatch),
   })
 )(Register);

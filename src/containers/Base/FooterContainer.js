@@ -3,17 +3,21 @@ import oc from "open-color";
 import { Navbar, Nav, NavItem } from "reactstrap";
 import styled from "styled-components";
 import SourceLink from "components/Admin/SourceLink";
+import { connect } from "react-redux";
+import * as userActions from "redux/modules/user";
+import { bindActionCreators } from "redux";
 const StyledTag = styled.a`
   margin-right: 8px;
-  color: ${oc.blue[6]};
+  color: white;
   &:hover {
-    color: ${oc.blue[9]};
   }
 `;
 const StyledNav = styled(Navbar)`
-  border: 1px solid ${oc.blue[6]};
+  background: ${oc.blue[6]};
 `;
-const Footer = () => {
+const Footer = (props) => {
+  const { visible } = props;
+  if (!visible) return null;
   return (
     <StyledNav>
       <Nav navbar>
@@ -65,4 +69,12 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default connect(
+  (state) => ({
+    visible: state.foot.getIn(["footer", "visible"]),
+    user: state.user,
+  }),
+  (dispatch) => ({
+    UserActions: bindActionCreators(userActions, dispatch),
+  })
+)(Footer);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import { Home, Auth, Adminpage, Mypage, Stats } from "pages";
+import { Home, Auth, Adminpage, Mypage, Stats, Message } from "pages";
 import PageSpinner from "components/Admin/PageSpinner";
 import storage from "lib/storage";
 import { connect } from "react-redux";
@@ -26,7 +26,6 @@ class App extends Component {
       window.location.href = "/auth/login?expired";
     }
   };
-
   componentDidMount() {
     this.initializeUserInfo();
   }
@@ -39,6 +38,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/auth" component={Auth} />
             <Route path="/stats" component={Stats} />
+            <Route path="/message" component={Message} />
             <MypageRoute path="/mypage" component={Mypage} />
             <PrivateRoute path="/admin" component={Adminpage} />
           </React.Suspense>

@@ -5,3 +5,4 @@ export { default as Mypage } from "./Mypage";
 export { default as Class } from "./Class";
 export { default as Stats } from "./Stats";
 export { default as Help } from "./Help";
+export { default as Message } from "./Message";

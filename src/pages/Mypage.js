@@ -79,6 +79,9 @@ const Mypage = ({ Component }) => {
   const routeChange = () => {
     history.push("/edit");
   };
+  const routeChangemsg = () => {
+    history.push("/message");
+  };
   const routeChange1 = () => {
     history.push("/stats");
   };
@@ -121,7 +124,12 @@ const Mypage = ({ Component }) => {
           >
             <MdInsertChart /> Stats
           </ItemCenter>
-          <ItemCenter tag="button" action className="border-light">
+          <ItemCenter
+            tag="button"
+            action
+            onClick={routeChangemsg}
+            className="border-light"
+          >
             <MdMessage /> Messages
           </ItemCenter>
           <ItemCenter

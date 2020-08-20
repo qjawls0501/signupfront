@@ -90,6 +90,10 @@ const AdminNavbarLinks = () => {
     setOpenProfile(null);
   };
   const history = useHistory();
+  const routeChangemsg = () => {
+    history.push("/message");
+    setOpenProfile(null);
+  };
   const routeChange = () => {
     history.push("/mypage");
     setOpenProfile(null);
@@ -249,7 +253,7 @@ const AdminNavbarLinks = () => {
                         tag="button"
                         action
                         className="border-light"
-                        onClick={handleCloseProfile}
+                        onClick={routeChangemsg}
                       >
                         <MdMessage /> Messages
                       </ListGroupItem>

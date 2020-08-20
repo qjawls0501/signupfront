@@ -11,6 +11,7 @@ import { bindActionCreators } from "redux";
 import * as authActions from "redux/modules/auth";
 import * as userActions from "redux/modules/user";
 import * as baseActions from "redux/modules/base";
+import * as footActions from "redux/modules/foot";
 import storage from "lib/storage";
 // import GoogleLogin from "react-google-login";
 import queryString from "query-string";
@@ -28,6 +29,7 @@ class Login extends Component {
   componentDidMount() {
     const { location } = this.props;
     this.props.BaseActions.setHeaderVisibility(false);
+    this.props.footActions.setFooterVisibility(false);
     const query = queryString.parse(location.search);
     if (query.expired !== undefined) {
       this.setError("세션에 만료되었습니다. 다시 로그인하세요.");
@@ -35,6 +37,7 @@ class Login extends Component {
   }
   componentWillMount() {
     this.props.BaseActions.setHeaderVisibility(false);
+    this.props.footActions.setFooterVisibility(false);
   }
 
   // 페이지에서 벗어 날 때 다시 활성화
@@ -64,6 +67,7 @@ class Login extends Component {
       storage.set("loggedInfo", loggedInfo);
       UserActions.setLoggedInfo(loggedInfo);
       UserActions.setValidated(true);
+      window.location.href = "/";
       // console.log(storage.get("loggedInfo").email);
     } catch (e) {
       console.log("a");
@@ -126,5 +130,6 @@ export default connect(
     AuthActions: bindActionCreators(authActions, dispatch),
     UserActions: bindActionCreators(userActions, dispatch),
     BaseActions: bindActionCreators(baseActions, dispatch),
+    footActions: bindActionCreators(footActions, dispatch),
   })
 )(Login);

@@ -165,13 +165,16 @@ const GradientBorder = styled.div`
 const Header = ({ children }) => {
   const classes = useStyles();
   const [toggle, setToggle] = useState(false);
-
+  const refresh = () => {
+    window.location.href = "/";
+  };
   const toggleMenu = () => {
     setToggle(!toggle);
   };
   const history = useHistory();
   const routeChange = () => {
     history.push("/");
+    window.location.href = "/";
   };
 
   return (
@@ -182,7 +185,7 @@ const Header = ({ children }) => {
             <Menubar onClick={toggleMenu}>
               <MenuIcon className={classes.menu} />
             </Menubar>
-            <Logo onClick={routeChange}>Calmsw</Logo>
+            <Logo onClick={routeChange}>Comin</Logo>
             <Drawer open={toggle} onClick={toggleMenu}>
               <DrawerBtn className={classes.root} onClick={toggleMenu} to="/">
                 <HomeIcon className={classes.icon} />
