@@ -20,25 +20,26 @@ const ShadowedBox = styled.div`
 
 // 로고
 const LogoWrapper = styled.div`
-  background: ${oc.blue[6]};
-  height: 5rem;
+  color: ${oc.blue[6]};
+  padding-top: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Logo = styled(Link)`
-  color: white;
+  color: blue;
   font-family: "Rajdhani";
   font-size: 2.4rem;
-  letter-spacing: 5px;
+  margin-bottom: 16px;
+  font-weight: bold;
   text-decoration: none;
 `;
 
 // children 이 들어가는 곳
 const Contents = styled.div`
   background: white;
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 0rem 2rem 2rem 2rem;
   height: auto;
 `;
 
@@ -46,7 +47,7 @@ const AuthWrapper = ({ children }) => (
   <Positioner>
     <ShadowedBox>
       <LogoWrapper>
-        <Logo to="/">Comin</Logo>
+        <Logo to="/">COMIN</Logo>
       </LogoWrapper>
       <Contents>{children}</Contents>
     </ShadowedBox>

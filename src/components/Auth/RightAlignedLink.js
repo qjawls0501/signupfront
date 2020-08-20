@@ -5,18 +5,24 @@ import { Link } from "react-router-dom";
 
 const Aligner = styled.div`
   margin-top: 1rem;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
 `;
-
 const StyledLink = styled(Link)`
-  color: ${oc.gray[6]};
+  color: blue;
   &:hover {
-    color: ${oc.gray[7]};
+    color: ${oc.blue[7]};
   }
 `;
-
+const StyledLink1 = styled(Link)`
+  color: blue;
+  &:hover {
+    color: ${oc.blue[7]};
+  }
+`;
 const RightAlignedLink = ({ to, children }) => (
   <Aligner>
+    <StyledLink1 to="/passwordforget">비밀번호 찾기</StyledLink1>
     <StyledLink to={to}>{children}</StyledLink>
   </Aligner>
 );

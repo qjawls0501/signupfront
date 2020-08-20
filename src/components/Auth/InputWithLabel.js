@@ -25,6 +25,7 @@ const Input = styled.input`
   padding-left: 0.5rem;
   height: 40px;
   padding-right: 0.5rem;
+  background: ${oc.gray[1]};
   margin-bottom: 0.25rem;
   ::placeholder {
     color: ${oc.gray[3]};

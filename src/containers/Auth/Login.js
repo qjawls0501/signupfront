@@ -5,6 +5,7 @@ import {
   AuthButton,
   RightAlignedLink,
   AuthError,
+  Bar,
 } from "components/Auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -87,25 +88,25 @@ class Login extends Component {
     const { handleChange, responseGoogle, handleLocalLogin, keyPress } = this;
     const { error } = this.props;
     return (
-      <AuthContent title="Login">
+      <AuthContent>
         <InputWithLabel
           label="이메일"
           name="email"
-          placeholder="이메일"
+          placeholder="Email"
           value={email}
           onChange={handleChange}
         />
         <InputWithLabel
           label="비밀번호"
           name="password"
-          placeholder="비밀번호"
+          placeholder="Password"
           type="password"
           value={password}
           onChange={handleChange}
           onKeyPress={keyPress}
         />
         {error && <AuthError>{error}</AuthError>}
-        <AuthButton onClick={handleLocalLogin}>Login</AuthButton>
+        <AuthButton onClick={handleLocalLogin}>로그인하기</AuthButton>
         {/* <GoogleLogin
           clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
           buttonText="Login"
@@ -114,7 +115,8 @@ class Login extends Component {
           cookiePolicy={"single_host_origin"}
         /> */}
         {/* {document.getElementById("googleButton")} */}
-        <RightAlignedLink to="/auth/register">Sign Up</RightAlignedLink>
+        <Bar></Bar>
+        <RightAlignedLink to="/auth/register">회원가입 할래요</RightAlignedLink>
       </AuthContent>
     );
   }

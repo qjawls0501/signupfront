@@ -9,6 +9,8 @@ import * as userActions from "redux/modules/user";
 import { PrivateRoute } from "components/PrivateRoute";
 import { MypageRoute } from "components/MypageRoute";
 import GAListener from "components/Admin/GAListener";
+import JoinRoom from "./components/ChatComponent/JoinRoom/JoinRoom";
+import Chat from "./components/ChatComponent/Chat/Chat";
 import "./styles/reduction.scss";
 class App extends Component {
   initializeUserInfo = async () => {
@@ -38,7 +40,8 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/auth" component={Auth} />
             <Route path="/stats" component={Stats} />
-            <Route path="/message" component={Message} />
+            <Route path="/message/chat" component={Chat} />
+            <Route exact path="/message" component={Message} />
             <MypageRoute path="/mypage" component={Mypage} />
             <PrivateRoute path="/admin" component={Adminpage} />
           </React.Suspense>

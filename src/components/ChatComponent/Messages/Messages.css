@@ -1,0 +1,7 @@
+.messages {
+    flex: 5;
+    padding: 5%;
+    overflow: auto;
+    /* overflow: scroll; */
+  }
+  
