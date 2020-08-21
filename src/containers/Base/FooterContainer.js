@@ -24,20 +24,20 @@ const Footer = (props) => {
         <NavItem>
           <StyledTag
             target="_blank"
-            class="link"
+            className="link"
             href="https://www.codingrobotlab.com"
           >
             회사소개
           </StyledTag>
-          <StyledTag target="_blank" class="link" href="/home">
+          <StyledTag target="_blank" className="link" href="/home">
             이용약관
           </StyledTag>
-          <StyledTag target="_blank" class="link" href="/home">
+          <StyledTag target="_blank" className="link" href="/home">
             개인정보 처리방침
           </StyledTag>
           <StyledTag
             target="_blank"
-            class="link"
+            className="link"
             href="mailto:contact@sweting.ai"
           >
             고객문의
@@ -55,12 +55,12 @@ const Footer = (props) => {
         <NavItem>
           <StyledTag
             target="_blank"
-            class="link"
+            className="link"
             href="https://www.facebook.com/codingrobotlab"
           >
             페이스북
           </StyledTag>
-          <StyledTag target="_blank" class="link" href="http://calmsw.com">
+          <StyledTag target="_blank" className="link" href="http://calmsw.com">
             CALMS
           </StyledTag>
         </NavItem>

@@ -80,7 +80,7 @@ const Mypage = ({ Component }) => {
     history.push("/edit");
   };
   const routeChangemsg = () => {
-    history.push("/message");
+    history.push("/chat");
   };
   const routeChange1 = () => {
     history.push("/stats");
@@ -130,7 +130,7 @@ const Mypage = ({ Component }) => {
             onClick={routeChangemsg}
             className="border-light"
           >
-            <MdMessage /> Messages
+            <MdMessage /> Chat
           </ItemCenter>
           <ItemCenter
             tag="button"

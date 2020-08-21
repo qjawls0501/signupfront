@@ -22,6 +22,7 @@ import styled from "styled-components";
 const StyledButton = styled(Button)`
   margin-bottom: 16px;
 `;
+
 const JoinRoom = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
@@ -31,7 +32,7 @@ const JoinRoom = () => {
         <div className="joinFormContainer" component={Paper}>
           <div className="joinFormBox">
             <div className="joinTitle">
-              <Typography component="h1" variant="h5">
+              <Typography color="primary" component="h1" variant="h5">
                 CominChat
               </Typography>
             </div>
@@ -48,18 +49,18 @@ const JoinRoom = () => {
                 id="room"
                 autoComplete="current-password"
                 onChange={(e) => setRoom(e.target.value)}
+                onKeyPress={(e) => setName(storage.get("loggedInfo").username)}
               />
               <div className="buttonBox mt-10">
                 <Link
                   className="joinButtonLink"
-                  onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-                  to={`/message/chat?name=${name}&room=${room}`}
+                  // onClick={(e) => (!name || !room ? e.preventDefault() : null)}
+                  to={`/chat/chatroom?name=${name}&room=${room}`}
                 >
                   <StyledButton
                     type="submit"
                     fullWidth
                     variant="contained"
-                    onClick={(e) => setName(storage.get("loggedInfo").username)}
                     color="primary"
                     className="joinButton mt-20"
                   >

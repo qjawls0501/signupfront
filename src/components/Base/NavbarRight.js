@@ -91,7 +91,7 @@ const AdminNavbarLinks = () => {
   };
   const history = useHistory();
   const routeChangemsg = () => {
-    history.push("/message");
+    history.push("/chat");
     setOpenProfile(null);
   };
   const routeChange = () => {
@@ -255,7 +255,7 @@ const AdminNavbarLinks = () => {
                         className="border-light"
                         onClick={routeChangemsg}
                       >
-                        <MdMessage /> Messages
+                        <MdMessage /> Chat
                       </ListGroupItem>
                       <ListGroupItem
                         tag="button"

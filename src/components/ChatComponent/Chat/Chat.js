@@ -2,7 +2,7 @@ import React, { useEffect, useState, useReducer } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 import "./Chat.css";
-
+import styled from "styled-components";
 // 하위 컴포넌트
 import Messages from "../Messages/Messages";
 import RoomInfo from "../RoomInfo/RoomInfo";
@@ -82,9 +82,9 @@ const Chat = ({ location }) => {
           <AppBar color="primary">
             <Toolbar className="toolBar">
               <Typography variant="h4" color="inherit" noWrap>
-                LamaChat
+                COMIN Chat
               </Typography>
-              <Button color="inherit" href="/message">
+              <Button color="inherit" href="/chat">
                 close
               </Button>
             </Toolbar>
