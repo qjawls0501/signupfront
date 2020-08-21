@@ -173,7 +173,6 @@ const Header = ({ children }) => {
   };
   const history = useHistory();
   const routeChange = () => {
-    history.push("/");
     window.location.href = "/";
   };
 

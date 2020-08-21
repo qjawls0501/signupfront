@@ -10,7 +10,7 @@ export const AuthRoute = ({ component: Component, ...rest }) => (
       storage.get("loggedInfo") === null ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        (window.location.href = "/")
       )
     }
   />

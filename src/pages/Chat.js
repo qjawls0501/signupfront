@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as baseActions from "redux/modules/base";
 import * as FootActions from "redux/modules/foot";
 import JoinRoom from "components/ChatComponent/JoinRoom/JoinRoom";
-class Message extends Component {
+class Chat extends Component {
   componentWillMount() {
     this.props.BaseActions.setHeaderVisibility(false);
     this.props.FootActions.setFooterVisibility(false);
@@ -26,4 +26,4 @@ export default connect(
     BaseActions: bindActionCreators(baseActions, dispatch),
     FootActions: bindActionCreators(FootActions, dispatch),
   })
-)(Message);
+)(Chat);

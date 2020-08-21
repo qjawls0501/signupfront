@@ -28,7 +28,7 @@ import styles from "assets/HeaderLinkStyle";
 import {
   MdExitToApp,
   MdHelp,
-  MdMessage,
+  MdChat,
   MdPersonPin,
   MdSettingsApplications,
   MdInsertChart,
@@ -90,20 +90,20 @@ const AdminNavbarLinks = () => {
     setOpenProfile(null);
   };
   const history = useHistory();
-  const routeChangemsg = () => {
-    history.push("/chat");
+  const routeChangeChat = () => {
+    window.location.href = "/chat";
     setOpenProfile(null);
   };
   const routeChange = () => {
-    history.push("/mypage");
+    window.location.href = "/mypage";
     setOpenProfile(null);
   };
   const routeChange1 = () => {
-    history.push("/help");
+    window.location.href = "/help";
     setOpenProfile(null);
   };
   const routeChange2 = () => {
-    history.push("/stats");
+    window.location.href = "/stats";
     setOpenProfile(null);
   };
   const handleLogout = async (props) => {
@@ -253,17 +253,9 @@ const AdminNavbarLinks = () => {
                         tag="button"
                         action
                         className="border-light"
-                        onClick={routeChangemsg}
+                        onClick={routeChangeChat}
                       >
-                        <MdMessage /> Chat
-                      </ListGroupItem>
-                      <ListGroupItem
-                        tag="button"
-                        action
-                        className="border-light"
-                        onClick={handleCloseProfile}
-                      >
-                        <MdSettingsApplications /> Settings
+                        <MdChat /> Chat
                       </ListGroupItem>
                       <ListGroupItem
                         tag="button"

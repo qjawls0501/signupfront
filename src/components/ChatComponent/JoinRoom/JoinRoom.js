@@ -26,6 +26,9 @@ const StyledButton = styled(Button)`
 const JoinRoom = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const routechange = () => {
+    window.location.href = "/";
+  };
   return (
     <div className="joinOuterContainer">
       <div className="joinInnerContainer">
@@ -54,7 +57,7 @@ const JoinRoom = () => {
               <div className="buttonBox mt-10">
                 <Link
                   className="joinButtonLink"
-                  // onClick={(e) => (!name || !room ? e.preventDefault() : null)}
+                  onClick={(e) => (!name || !room ? e.preventDefault() : null)}
                   to={`/chat/chatroom?name=${name}&room=${room}`}
                 >
                   <StyledButton
@@ -67,12 +70,13 @@ const JoinRoom = () => {
                     채팅방 들어가기
                   </StyledButton>
                 </Link>
-                <Link className="joinButtonLink" to={`/`}>
+                <Link className="joinButtonLink">
                   <StyledButton
                     fullWidth
                     variant="contained"
                     color="primary"
                     className="joinButton mt-20"
+                    onClick={routechange}
                   >
                     Home으로 돌아가기
                   </StyledButton>

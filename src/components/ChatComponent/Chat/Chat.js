@@ -34,7 +34,9 @@ const Chat = ({ location }) => {
     // console.log(data); // 객체 : {name: "lama", room: "peru"}
     // 다시 정리
     const { name, room } = queryString.parse(location.search);
-
+    const routechange = () => {
+      window.location.href = "/";
+    };
     socket = io(ENDPOINT); // 소켓 연결
 
     setName(name);

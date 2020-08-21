@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import { Home, Auth, Adminpage, Mypage, Stats, Message } from "pages";
+import {
+  Home,
+  Auth,
+  Adminpage,
+  Mypage,
+  Stats,
+  Chat,
+  Message,
+  Class,
+} from "pages";
 import PageSpinner from "components/Admin/PageSpinner";
 import storage from "lib/storage";
 import { connect } from "react-redux";
@@ -10,7 +19,7 @@ import { PrivateRoute } from "components/PrivateRoute";
 import { MypageRoute } from "components/MypageRoute";
 import GAListener from "components/Admin/GAListener";
 import JoinRoom from "./components/ChatComponent/JoinRoom/JoinRoom";
-import Chat from "./components/ChatComponent/Chat/Chat";
+import Chatting from "./components/ChatComponent/Chat/Chat";
 import "./styles/reduction.scss";
 class App extends Component {
   initializeUserInfo = async () => {
@@ -40,8 +49,9 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/auth" component={Auth} />
             <Route path="/stats" component={Stats} />
-            <MypageRoute path="/chat/chatroom" component={Chat} />
-            <MypageRoute exact path="/chat" component={Message} />
+            <Route path="/class" component={Class} />
+            <MypageRoute path="/chat/chatroom" component={Chatting} />
+            <MypageRoute exact path="/chat" component={Chat} />
             <MypageRoute path="/mypage" component={Mypage} />
             <PrivateRoute path="/admin" component={Adminpage} />
           </React.Suspense>
