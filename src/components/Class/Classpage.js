@@ -18,6 +18,8 @@ import {
   ListGroupItem,
   Row,
 } from "reactstrap";
+import { AuthButton } from "components/Auth";
+import { Link } from "react-router-dom";
 const StyleRow = styled(Row)`
   margin-top: 8px;
 `;
@@ -119,6 +121,7 @@ class Classpage extends Component {
             </Card>
           </Col>
         </StyleRow>
+        <Link to="/classregister">강의 등록하기</Link>
       </div>
     );
   }

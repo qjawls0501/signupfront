@@ -21,6 +21,7 @@ import GAListener from "components/Admin/GAListener";
 import JoinRoom from "./components/ChatComponent/JoinRoom/JoinRoom";
 import Chatting from "./components/ChatComponent/Chat/Chat";
 import "./styles/reduction.scss";
+import { ClassRegister } from "containers/Class";
 class App extends Component {
   initializeUserInfo = async () => {
     const loggedInfo = storage.get("loggedInfo");
@@ -50,6 +51,7 @@ class App extends Component {
             <Route path="/auth" component={Auth} />
             <Route path="/stats" component={Stats} />
             <Route path="/class" component={Class} />
+            {/* <Route path="/classregister" component={ClassRegister} /> */}
             <MypageRoute path="/chat/chatroom" component={Chatting} />
             <MypageRoute exact path="/chat" component={Chat} />
             <MypageRoute path="/mypage" component={Mypage} />
