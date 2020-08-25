@@ -4,10 +4,8 @@ import { bindActionCreators } from "redux";
 import * as baseActions from "redux/modules/base";
 import * as FootActions from "redux/modules/foot";
 import { AuthWrapper } from "components/Auth";
-import { Route } from "react-router-dom";
 import { Login, Register } from "containers/Auth";
 import { AuthRoute } from "components/AuthRoute";
-import { bind } from "file-loader";
 class Auth extends Component {
   // 페이지에 진입 할 때 헤더를 비활성화
   componentWillMount() {

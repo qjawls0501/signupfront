@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 import "./Chat.css";
-import styled from "styled-components";
 // 하위 컴포넌트
 import Messages from "../Messages/Messages";
 import RoomInfo from "../RoomInfo/RoomInfo";
@@ -34,9 +33,7 @@ const Chat = ({ location }) => {
     // console.log(data); // 객체 : {name: "lama", room: "peru"}
     // 다시 정리
     const { name, room } = queryString.parse(location.search);
-    const routechange = () => {
-      window.location.href = "/";
-    };
+
     socket = io(ENDPOINT); // 소켓 연결
 
     setName(name);

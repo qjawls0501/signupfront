@@ -3,14 +3,8 @@ import { MdSearch } from "react-icons/md";
 import { Form } from "reactstrap";
 import styled from "styled-components";
 import oc from "open-color";
-import { shadow, media } from "../../lib/styleUtil";
 import Input from "@material-ui/core/Input";
-const StyleInput = styled(Input)`
-  &:focus {
-    border: none;
-    outline: none;
-  }
-`;
+
 const StyleSearch = styled(MdSearch)`
   &:focus {
     border: none;

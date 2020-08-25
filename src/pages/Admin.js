@@ -1,6 +1,5 @@
 import { AnnouncementCard, TodosCard } from "components/Card";
 import HorizontalAvatarList from "components/Admin/HorizontalAvatarList";
-import MapWithBubbles from "components/Admin/MapWithBubbles";
 import Page from "components/Admin/Page";
 import ProductMedia from "components/Admin/ProductMedia";
 import SupportTicket from "components/Admin/SupportTicket";

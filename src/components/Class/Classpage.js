@@ -9,16 +9,12 @@ import {
   Card,
   CardBody,
   CardImg,
-  CardImgOverlay,
   CardLink,
   CardText,
   CardTitle,
   Col,
-  ListGroup,
-  ListGroupItem,
   Row,
 } from "reactstrap";
-import { AuthButton } from "components/Auth";
 import { Link } from "react-router-dom";
 const StyleRow = styled(Row)`
   margin-top: 8px;

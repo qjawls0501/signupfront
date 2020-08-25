@@ -75,9 +75,9 @@ class Login extends Component {
       this.setError("올바른 이메일 또는 비밀번호를 입력해 주세요.");
     }
   };
-  responseGoogle = (response) => {
-    console.log(response);
-  };
+  // responseGoogle = (response) => {
+  //   console.log(response);
+  // };
   keyPress = (e) => {
     if (e.key === "Enter") {
       this.handleLocalLogin();
@@ -85,7 +85,7 @@ class Login extends Component {
   };
   render() {
     const { email, password } = this.props.form.toJS(); // form 에서 email 과 password 값을 읽어옴
-    const { handleChange, responseGoogle, handleLocalLogin, keyPress } = this;
+    const { handleChange, handleLocalLogin, keyPress } = this;
     const { error } = this.props;
     return (
       <AuthContent>

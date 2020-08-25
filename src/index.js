@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Root from "./Root";
-import HeaderContainer from "containers/Base/HeaderContainer";
 import "./index.css";
 import configureStore from "redux/configureStore";
 import { AppContainer } from "react-hot-loader";

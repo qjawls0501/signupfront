@@ -3,22 +3,19 @@ import * as BookAPI from "lib/api/book";
 import { pender } from "redux-pender";
 import { Map } from "immutable";
 
-const CHANGE_INPUT = "auth/CHANGE_INPUT"; // input 값 변경
-const INITIALIZE_FORM = "auth/INITIALIZE_FORM"; // form 초기화
-const CHECK_CLASS_EXISTS = "auth/CHECK_CLASS_EXISTS"; // 이메일 중복 확인
-const LOCAL_CREATE = "auth/LOCAL_CREATE"; // 이메일 가입
-const LOGOUT = "auth/LOGOUT"; // 로그아웃
-const SET_ERROR = "auth/SET_ERROR"; // 오류 설정
+const CHANGE_INPUT = "books/CHANGE_INPUT"; // input 값 변경
+const INITIALIZE_FORM = "books/INITIALIZE_FORM"; // form 초기화
+const CHECK_CLASS_EXISTS = "books/CHECK_CLASS_EXISTS"; // 이메일 중복 확인
+const LOCAL_CREATE = "books/LOCAL_CREATE"; // 이메일 가입
+const DELETE_CLASS = "books/DELETE_CLASS"; // 로그아웃
+const SET_ERROR = "books/SET_ERROR"; // 오류 설정
 
 export const createClass = createAction(LOCAL_CREATE, BookAPI.createClass); // { email, username, password }
 export const setError = createAction(SET_ERROR); // { form, message }
-export const deleteClass = createAction(LOGOUT, BookAPI.deleteClass);
+export const deleteClass = createAction(DELETE_CLASS, BookAPI.deleteClass);
 export const changeInput = createAction(CHANGE_INPUT); //  { form, name, value }
 export const initializeForm = createAction(INITIALIZE_FORM); // form
-export const checkClassExists = createAction(
-  CHECK_CLASS_EXISTS,
-  BookAPI.checkClass
-); // email
+export const checkClass = createAction(CHECK_CLASS_EXISTS, BookAPI.checkClass); // email
 
 const initialState = Map({
   create: Map({

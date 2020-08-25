@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./RoomInfo.css";
 
 import Button from "@material-ui/core/Button";

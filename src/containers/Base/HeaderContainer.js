@@ -5,7 +5,6 @@ import * as userActions from "redux/modules/user";
 import { bindActionCreators } from "redux";
 import storage from "lib/storage";
 import AdminNavbarLinks from "components/Base/NavbarRight";
-import Page from "components/Admin/Page";
 class HeaderContainer extends Component {
   handleLogout = async () => {
     const { UserActions } = this.props;

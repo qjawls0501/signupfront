@@ -2,7 +2,6 @@ import React from "react";
 import oc from "open-color";
 import { Navbar, Nav, NavItem } from "reactstrap";
 import styled from "styled-components";
-import SourceLink from "components/Admin/SourceLink";
 import { connect } from "react-redux";
 import * as userActions from "redux/modules/user";
 import { bindActionCreators } from "redux";

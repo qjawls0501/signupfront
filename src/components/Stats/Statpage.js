@@ -5,7 +5,7 @@ import { randomNum } from "utils/demos.js";
 
 import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 
-import { Line, Pie, Doughnut, Bar, Radar, Polar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 import Page from "components/Admin/Page";
 

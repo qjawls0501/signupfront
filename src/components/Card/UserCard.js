@@ -4,7 +4,6 @@ import PropTypes from "utils/propTypes";
 import classNames from "classnames";
 import image1 from "assets/img/users/100_1.jpg";
 import { Card, CardTitle, CardSubtitle, CardText, CardBody } from "reactstrap";
-import storage from "lib/storage";
 import Avatar from "../Admin/Avatar";
 import { styled } from "@material-ui/core";
 const StyledCard = styled(CardBody)`

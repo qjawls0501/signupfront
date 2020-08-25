@@ -2,20 +2,15 @@ import React from "react";
 import classNames from "classnames";
 import storage from "lib/storage";
 import { UserCard } from "components/Card";
-import { useHistory } from "react-router-dom";
-import { shadow, media } from "../../lib/styleUtil";
+import { shadow } from "../../lib/styleUtil";
 import styled from "styled-components";
 import oc from "open-color";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Hidden from "@material-ui/core/Hidden";
 import Poppers from "@material-ui/core/Popper";
-import Divider from "@material-ui/core/Divider";
 import { connect } from "react-redux";
 import * as userActions from "redux/modules/user";
 import { bindActionCreators } from "redux";
@@ -30,7 +25,6 @@ import {
   MdHelp,
   MdChat,
   MdPersonPin,
-  MdSettingsApplications,
   MdInsertChart,
 } from "react-icons/md";
 import { ListGroup, ListGroupItem } from "reactstrap";
@@ -89,7 +83,7 @@ const AdminNavbarLinks = () => {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
-  const history = useHistory();
+  // const history = useHistory();
   const routeChangeChat = () => {
     window.location.href = "/chat";
     setOpenProfile(null);

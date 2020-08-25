@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import {
-  Home,
-  Auth,
-  Adminpage,
-  Mypage,
-  Stats,
-  Chat,
-  Message,
-  Class,
-} from "pages";
+import { Home, Auth, Adminpage, Mypage, Stats, Chat, Class } from "pages";
 import PageSpinner from "components/Admin/PageSpinner";
 import storage from "lib/storage";
 import { connect } from "react-redux";
@@ -18,7 +9,6 @@ import * as userActions from "redux/modules/user";
 import { PrivateRoute } from "components/PrivateRoute";
 import { MypageRoute } from "components/MypageRoute";
 import GAListener from "components/Admin/GAListener";
-import JoinRoom from "./components/ChatComponent/JoinRoom/JoinRoom";
 import Chatting from "./components/ChatComponent/Chat/Chat";
 import "./styles/reduction.scss";
 import { ClassRegister } from "containers/Class";

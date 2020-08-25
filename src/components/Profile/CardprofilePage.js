@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as baseActions from "redux/modules/base";
@@ -6,27 +6,11 @@ import { useHistory } from "react-router-dom";
 import storage from "lib/storage";
 import { UserCard } from "components/Card";
 import oc from "open-color";
-import classNames from "classnames";
 import bg1Image from "assets/img/bg/react.png";
 import bg2Image from "assets/img/bg/vue.png";
-import * as userActions from "redux/modules/user";
 // @material-ui/icons
 import styled from "styled-components";
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import styles from "assets/HeaderLinkStyle";
-import reactimg from "assets/img/bg/react.png";
-import vueimg from "assets/img/bg/vue.png";
-import {
-  MdExitToApp,
-  MdHelp,
-  MdMessage,
-  MdPersonPin,
-  MdSettingsApplications,
-  MdInsertChart,
-  MdEdit,
-  MdChat,
-} from "react-icons/md";
+import { MdExitToApp, MdInsertChart, MdEdit, MdChat } from "react-icons/md";
 import {
   ListGroup,
   CardTitle,
@@ -39,7 +23,6 @@ import {
   CardText,
   ListGroupItem,
 } from "reactstrap";
-import Page from "components/Admin/Page";
 const ItemCenter = styled(ListGroupItem)`
   text-align: center;
   padding-left: 16px;
@@ -86,9 +69,9 @@ const CardprofilePage = ({ Component }) => {
   const routeChange1 = () => {
     history.push("/stats");
   };
-  const routeChange2 = () => {
-    history.push("/settings");
-  };
+  // const routeChange2 = () => {
+  //   history.push("/settings");
+  // };
   const handleLogout = async (props) => {
     const { UserActions } = props;
     try {

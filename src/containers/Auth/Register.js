@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import {
   AuthContent,
   InputWithLabel,
@@ -11,12 +11,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as AuthActions from "redux/modules/auth";
 import * as baseActions from "redux/modules/base";
+import * as UserActions from "redux/modules/user";
 import * as footActions from "redux/modules/foot";
 import { isEmail, isLength } from "validator";
 import debounce from "lodash/debounce";
-import storage from "lib/storage";
-import * as UserActions from "redux/modules/user";
-import { valid } from "semver";
 class Register extends Component {
   setError = (message) => {
     const { AuthActions } = this.props;
@@ -104,11 +102,6 @@ class Register extends Component {
   handleChange = (e) => {
     const { AuthActions } = this.props;
     const { name, value } = e.target;
-    // console.log(this.props.form.toJS().email);
-    // console.log(this.props.form.toJS());
-    // console.log(AuthActions);
-    // console.log(e.target.value);
-    // console.log(storage);
     AuthActions.changeInput({
       name,
       value,
