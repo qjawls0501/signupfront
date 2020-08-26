@@ -4,7 +4,6 @@ import auth from "./auth";
 import foot from "./foot";
 import user from "./user";
 import book from "./book";
-import classes from "./class";
 import { penderReducer } from "redux-pender";
 export default combineReducers({
   base,
@@ -12,6 +11,5 @@ export default combineReducers({
   auth,
   user,
   foot,
-  classes,
   pender: penderReducer,
 });

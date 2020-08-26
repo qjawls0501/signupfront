@@ -5,18 +5,20 @@ import {
   AuthButton,
   RightAlignedLink2,
   AuthWrapper,
+  AuthError,
 } from "components/Auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as baseActions from "redux/modules/base";
 import * as footActions from "redux/modules/foot";
 import * as BookActions from "redux/modules/book";
+import storage from "lib/storage";
 import * as UserActions from "redux/modules/user";
 class ClassRegister extends Component {
   setError = (message) => {
     const { BookActions } = this.props;
     BookActions.setError({
-      form: "register",
+      form: "create",
       message,
     });
   };
@@ -24,22 +26,15 @@ class ClassRegister extends Component {
     const { BookActions } = this.props;
     const { name, value } = e.target;
     // console.log(this.props.form.toJS().email);
-    // console.log(this.props.form.toJS());
+    // console.log(this);
     // console.log(BookActions);
     // console.log(e.target.value);
     // console.log(storage);
     BookActions.changeInput({
       name,
       value,
-      form: "register",
+      form: "create",
     });
-    // const validation = this.validate[name](value);
-    // if (name.indexOf("password") > -1 || !validation) return;
-    // // 비밀번호 검증이거나, 검증 실패하면 여기서 마침
-    // else if (name === "email") {
-    //   const check = this.checkEmailExists;
-    //   check(value);
-    // } // name 에 따라 이메일체크할지 아이디 체크 할지 결정
   };
   componentWillMount() {
     this.props.BaseActions.setHeaderVisibility(false);
@@ -52,12 +47,15 @@ class ClassRegister extends Component {
   // 페이지에서 벗어 날 때 다시 활성화
   componentWillUnmount() {
     const { BookActions } = this.props;
-    BookActions.initializeForm("register");
+    BookActions.initializeForm("create");
   }
   keyPress = (e) => {
     if (e.key === "Enter") {
       this.handleLocalCreate();
     }
+  };
+  routechange = () => {
+    window.location.href = "/";
   };
   handleLocalCreate = async () => {
     const { form, BookActions, error, history } = this.props;
@@ -73,14 +71,15 @@ class ClassRegister extends Component {
         tags,
       });
       const classInfo = this.props.result.toJS();
-      console.log(classInfo);
+      storage.set("classInfo", classInfo);
+      console.log(storage.get("classInfo"));
       // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
       history.push("/class"); // 회원가입 성공시 홈페이지로 이동
     } catch (e) {
       // 에러 처리하기
       if (e.response.status === 409) {
         const { key } = e.response.data;
-        if (key === "titlt") {
+        if (key === "title") {
           const message = "이미 존재하는 강의명입니다.";
           return this.setError(message);
         }
@@ -90,7 +89,8 @@ class ClassRegister extends Component {
   };
   render() {
     const { title, authors, price, tags } = this.props.form.toJS();
-    const { handleChange, handleLocalCreate } = this;
+    const { error } = this.props;
+    const { handleChange, handleLocalCreate, routechange } = this;
     return (
       <AuthWrapper>
         <AuthContent title="Class">
@@ -123,7 +123,8 @@ class ClassRegister extends Component {
             onChange={handleChange}
           />
           <AuthButton onClick={handleLocalCreate}>강의 등록</AuthButton>
-          <RightAlignedLink2 to="/">Home으로 돌아가기</RightAlignedLink2>
+          {error && <AuthError>{error}</AuthError>}
+          <AuthButton onClick={routechange}>Home으로 돌아가기</AuthButton>
         </AuthContent>
       </AuthWrapper>
     );
@@ -132,10 +133,10 @@ class ClassRegister extends Component {
 
 export default connect(
   (state) => ({
-    form: state.auth.getIn(["register", "form"]),
-    error: state.auth.getIn(["register", "error"]),
-    exists: state.auth.getIn(["register", "exists"]),
-    result: state.auth.get("result"),
+    form: state.book.getIn(["create", "form"]),
+    error: state.book.getIn(["create", "error"]),
+    exists: state.book.getIn(["create", "exists"]),
+    result: state.book.get("result"),
   }),
   (dispatch) => ({
     BookActions: bindActionCreators(BookActions, dispatch),
