@@ -18,7 +18,7 @@ export const initializeForm = createAction(INITIALIZE_FORM); // form
 export const checkClass = createAction(CHECK_CLASS_EXISTS, BookAPI.checkClass); // email
 
 const initialState = Map({
-  create: Map({
+  register: Map({
     form: Map({
       title: "",
       authers: [""],
@@ -45,7 +45,10 @@ export default handleActions(
     ...pender({
       type: CHECK_CLASS_EXISTS,
       onSuccess: (state, action) =>
-        state.setIn(["create", "exists", "title"], action.payload.data.exists),
+        state.setIn(
+          ["register", "exists", "title"],
+          action.payload.data.exists
+        ),
     }),
     ...pender({
       type: LOCAL_CREATE,

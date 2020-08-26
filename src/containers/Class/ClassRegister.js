@@ -3,7 +3,8 @@ import {
   AuthContent,
   InputWithLabel,
   AuthButton,
-  RightAlignedLink,
+  RightAlignedLink2,
+  AuthWrapper,
 } from "components/Auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -15,7 +16,7 @@ class ClassRegister extends Component {
   setError = (message) => {
     const { BookActions } = this.props;
     BookActions.setError({
-      form: "create",
+      form: "register",
       message,
     });
   };
@@ -30,7 +31,7 @@ class ClassRegister extends Component {
     BookActions.changeInput({
       name,
       value,
-      form: "create",
+      form: "register",
     });
     // const validation = this.validate[name](value);
     // if (name.indexOf("password") > -1 || !validation) return;
@@ -51,7 +52,7 @@ class ClassRegister extends Component {
   // 페이지에서 벗어 날 때 다시 활성화
   componentWillUnmount() {
     const { BookActions } = this.props;
-    BookActions.initializeForm("create");
+    BookActions.initializeForm("register");
   }
   keyPress = (e) => {
     if (e.key === "Enter") {
@@ -62,18 +63,7 @@ class ClassRegister extends Component {
     const { form, BookActions, error, history } = this.props;
     const { title, authors, price, tags } = form.toJS();
 
-    const { validate } = this;
-
     if (error) return; // 현재 에러가 있는 상태라면 진행하지 않음
-    if (
-      !validate["title"](title) ||
-      !validate["authors"](authors) ||
-      !validate["price"](price) ||
-      !validate["tags"](tags)
-    ) {
-      // 하나라도 실패하면 진행하지 않음
-      return;
-    }
 
     try {
       await BookActions.createClass({
@@ -82,8 +72,8 @@ class ClassRegister extends Component {
         price,
         tags,
       });
-      const loggedInfo = this.props.result.toJS();
-      console.log(loggedInfo);
+      const classInfo = this.props.result.toJS();
+      console.log(classInfo);
       // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
       history.push("/class"); // 회원가입 성공시 홈페이지로 이동
     } catch (e) {
@@ -102,47 +92,49 @@ class ClassRegister extends Component {
     const { title, authors, price, tags } = this.props.form.toJS();
     const { handleChange, handleLocalCreate } = this;
     return (
-      <AuthContent title="Class">
-        <InputWithLabel
-          label="강의명"
-          name="title"
-          placeholder="react"
-          value={title}
-          onChange={handleChange}
-        />
-        <InputWithLabel
-          label="강사명"
-          name="authors"
-          placeholder="velopert"
-          value={authors}
-          onChange={handleChange}
-        />
-        <InputWithLabel
-          label="가격"
-          name="price"
-          placeholder="20000"
-          value={price}
-          onChange={handleChange}
-        />
-        <InputWithLabel
-          label="태그"
-          name="tags"
-          placeholder="react,vue"
-          value={tags}
-          onChange={handleChange}
-        />
-        <AuthButton onClick={handleLocalCreate}>강의 등록</AuthButton>
-        <RightAlignedLink to="/">Home으로 돌아가기</RightAlignedLink>
-      </AuthContent>
+      <AuthWrapper>
+        <AuthContent title="Class">
+          <InputWithLabel
+            label="강의명"
+            name="title"
+            placeholder="react"
+            value={title}
+            onChange={handleChange}
+          />
+          <InputWithLabel
+            label="강사명"
+            name="authors"
+            placeholder="velopert"
+            value={authors}
+            onChange={handleChange}
+          />
+          <InputWithLabel
+            label="가격"
+            name="price"
+            placeholder="20000"
+            value={price}
+            onChange={handleChange}
+          />
+          <InputWithLabel
+            label="태그"
+            name="tags"
+            placeholder="react,vue"
+            value={tags}
+            onChange={handleChange}
+          />
+          <AuthButton onClick={handleLocalCreate}>강의 등록</AuthButton>
+          <RightAlignedLink2 to="/">Home으로 돌아가기</RightAlignedLink2>
+        </AuthContent>
+      </AuthWrapper>
     );
   }
 }
 
 export default connect(
   (state) => ({
-    form: state.auth.getIn(["create", "form"]),
-    error: state.auth.getIn(["create", "error"]),
-    exists: state.auth.getIn(["create", "exists"]),
+    form: state.auth.getIn(["register", "form"]),
+    error: state.auth.getIn(["register", "error"]),
+    exists: state.auth.getIn(["register", "exists"]),
     result: state.auth.get("result"),
   }),
   (dispatch) => ({
