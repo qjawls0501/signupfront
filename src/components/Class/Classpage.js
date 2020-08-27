@@ -24,7 +24,6 @@ import {
   Row,
   Button,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 const Container = styled.div`
   padding: 0px 10%;
 `;
@@ -34,10 +33,17 @@ const StyleRow = styled(Row)`
 const StyleCard = styled(Card)`
   margin: 8px 16px;
 `;
+const BodyCenter = styled(CardBody)`
+  text-align: center;
+`;
 const TitleCenter = styled(CardTitle)`
   text-align: center;
   font-weight: bold;
   font-size: 20px;
+`;
+const TextCenter = styled(CardText)`
+  text-align: center;
+  font-size: 16px;
 `;
 const StyleImg = styled(CardImg)`
   border: 1px solid ${oc.gray[3]};
@@ -69,7 +75,7 @@ const StyleLink = styled(Button)`
 
 class Classpage extends Component {
   routeChange = () => {
-    window.location.href = "/classregister";
+    // window.location.href = "/classregister";
   };
   componentWillMount() {
     this.props.BaseActions.setHeaderVisibility(true);
@@ -78,130 +84,91 @@ class Classpage extends Component {
   componentDidMount() {
     this.props.BaseActions.setHeaderVisibility(true);
     this.props.FootActions.setFooterVisibility(true);
+  }
+  render() {
+    const { routeChange } = this;
     var result = this.props.BookActions.checkClass();
     result.then(function (response) {
+      const classtable = response.data;
       for (let i = 0; i < response.data.length; i++) {
         const classInfo = response.data[i];
         storage.set("classInfo" + i, classInfo);
-        console.log(storage.get("classInfo" + i));
-        // console.log(
-        //   "title=",
-        //   response.data[i].title,
-        //   "tags=",
-        //   response.data[i].tags
-        // );
       }
+      console.log(classtable);
+      console.log(response);
     });
-  }
-  handlecheckClass = async () => {
-    const { form, BookActions, error, history } = this.props;
-    const { title, authors, price, tags } = form.toJS();
-    if (error) return;
-
-    try {
-      await BookActions.checkClass({
-        title,
-        authors,
-        price,
-        tags,
-      });
-      const classInfo = this.props.result.toJS();
-
-      console.log(classInfo);
-      // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
-      history.push("/class"); // 회원가입 성공시 홈페이지로 이동
-    } catch (e) {
-      // 에러 처리하기
-      if (e.response.status === 409) {
-        const { key } = e.response.data;
-        if (key === "title") {
-          const message = "이미 존재하는 강의명입니다.";
-          return this.setError(message);
-        }
-      }
-      this.setError("알 수 없는 에러가 발생했습니다.");
-    }
-  };
-  render() {
-    const { routeChange, handlecheckClass } = this;
-    const { title, authors, price, tags } = this.props.form.toJS();
     return (
       <Container>
         <StyleRow>
           <Col md={6} sm={6} xs={12} className="mb-3">
             <StyleCard>
-              <StyleImg top src={bg1Image} height="300px" />
+              <StyleImg top src={bg1Image} height="250px" />
               <CardBody>
                 <TitleCenter>{storage.get("classInfo" + 0).title}</TitleCenter>
-                <CardText>{storage.get("classInfo" + 0).tags}</CardText>
+                <TextCenter>{storage.get("classInfo" + 0).tags}</TextCenter>
               </CardBody>
-              {/* <ListGroup flush>
-                <ListGroupItem>Cras justo odio</ListGroupItem>
-                <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                <ListGroupItem>Morbi leo risus</ListGroupItem>
-              </ListGroup> */}
-              <CardBody>
+              <BodyCenter>
                 <CardLink tag="a" href="classinfo">
                   More
                 </CardLink>
-              </CardBody>
+              </BodyCenter>
             </StyleCard>
           </Col>
           <Col md={6} sm={6} xs={12} className="mb-3">
             <StyleCard>
-              <StyleImg top src={bg1Image} height="300px" />
+              <StyleImg top src={bg1Image} height="250px" />
               <CardBody>
                 <TitleCenter>{storage.get("classInfo" + 1).title}</TitleCenter>
-                <CardText>{storage.get("classInfo" + 1).tags}</CardText>
+                <TextCenter>{storage.get("classInfo" + 1).tags}</TextCenter>
               </CardBody>
               {/* <ListGroup flush>
                 <ListGroupItem>Cras justo odio</ListGroupItem>
                 <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
                 <ListGroupItem>Morbi leo risus</ListGroupItem>
               </ListGroup> */}
-              <CardBody>
+              <BodyCenter>
                 <CardLink tag="a" href="classinfo">
                   More
                 </CardLink>
-              </CardBody>
+              </BodyCenter>
             </StyleCard>
           </Col>
           <Col md={6} sm={6} xs={12} className="mb-3">
             <StyleCard>
-              <StyleImg top src={bg1Image} height="300px" />
+              <StyleImg top src={bg1Image} height="250px" />
               <CardBody>
                 <TitleCenter>{storage.get("classInfo" + 2).title}</TitleCenter>
-                <CardText>{storage.get("classInfo" + 2).tags}</CardText>
+                <TextCenter>{storage.get("classInfo" + 2).tags}</TextCenter>
               </CardBody>
               {/* <ListGroup flush>
                 <ListGroupItem>Cras justo odio</ListGroupItem>
                 <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
                 <ListGroupItem>Morbi leo risus</ListGroupItem>
               </ListGroup> */}
-              <CardBody>
+              <BodyCenter>
                 <CardLink tag="a" href="classinfo">
                   More
                 </CardLink>
-              </CardBody>
+              </BodyCenter>
             </StyleCard>
           </Col>
           <Col md={6} sm={6} xs={12} className="mb-3">
             <StyleCard>
-              <StyleImg top src={bg1Image} height="300px" />
+              <StyleImg top src={bg1Image} height="250px" />
               <CardBody>
                 <TitleCenter>{storage.get("classInfo" + 3).title}</TitleCenter>
-                <CardText>{storage.get("classInfo" + 3).tags}</CardText>
+                <TextCenter>{storage.get("classInfo" + 3).tags}</TextCenter>
               </CardBody>
               {/* <ListGroup flush>
                 <ListGroupItem>Cras justo odio</ListGroupItem>
                 <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
                 <ListGroupItem>Morbi leo risus</ListGroupItem>
               </ListGroup> */}
-              <CardBody>
+              <BodyCenter>
                 <CardLink tag="a" href="classinfo">
                   More
                 </CardLink>
-              </CardBody>
+              </BodyCenter>
             </StyleCard>
           </Col>
         </StyleRow>
